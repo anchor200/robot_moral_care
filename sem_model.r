@@ -1,0 +1,1600 @@
+model <- '
+
+
+
+MR =~ MR_1 + MR_2 + MR_3 + MR_4 + MR_5 + MR_6 + MR_7 + MR_8 +  MR_9 + MR_10 + MR_11 + MR_12 + MR_13
+
+ANI =~ AN_1 + AN_2 + AN_3 + AN_4 + AN_5 + AN_6 + AN_7 + AN_8 + AM_1 + AM_2 + AM_3 + AM_4 + AM_5 + AM_6 + AM_7 + AM_8 + AM_9 + AM_10 + AM_11 + AM_12 + AM_13 + AM_14 + AM_15
+
+ACE =~ AC_1 + AC_2 + AC_3 + AC_4 + AC_5 + AC_6. + AC_7 + AC_8 + AC_9. + AC_10 + AC_11
+
+SBS =~ SBS_1 + SBS_2 + SBS_3 + SBS_4 + SBS_5 + SBS_6
+
+IRI.EC =~ IRI_2.EC + IRI_4.EC. + IRI_9.EC + IRI_14.EC. + IRI_18.EC. + IRI_20.EC + IRI_22.EC
+
+IRI.PT =~ IRI_28.PT + IRI_3.PT. + IRI_8.PT + IRI_11.PT + IRI_15.PT. + IRI_21.PT + IRI_25.PT
+
+EXP =~ EXP_1 +EXP_2 + EXP_3
+
+RA =~ RHAB
+
+ANI ~ SBS + RA
+ACE ~ SBS + RA
+
+MR ~ SBS + ANI + ACE + IRI.EC + IRI.PT + EXP + Gender   + EDU + RA+ RATE_WITCH + Age
+
+
+#構造
+# ANI~~AMO
+EXP~EDU
+# AMO~~ACE
+ANI~~ACE
+# AMO~~SBS
+# AMO~~RA
+ANI~~EXP
+
+# AMO	~~	EXP
+ACE	~	Gender
+ANI~~IRI.PT
+ANI~~IRI.EC
+RA	~	EDU
+EXP ~~ RA
+RA	~	Gender
+SBS	~~	RA
+ACE	~	EDU
+ACE	~~	EXP
+AM_12	~~	AM_15
+IRI_14.EC.	~~	IRI_18.EC.
+AN_1	~~	AN_2
+AM_10	~~	AM_12
+AM_10	~~	AM_15
+AM_4	~~	AM_7
+AM_6	~~	AM_15
+AM_6	~~	AM_10
+IRI_4.EC.	~~	IRI_14.EC.
+IRI_18.EC.	~~	IRI_3.PT.
+MR_12	~~	MR_13
+AM_6	~~	AM_12
+IRI_4.EC.	~~	IRI_18.EC.
+IRI_14.EC.	~~	IRI_3.PT.
+AM_2	~~	AM_12
+IRI_14.EC.	~~	IRI_15.PT.
+AM_2	~~	AM_15
+IRI_3.PT.	~~	IRI_15.PT.
+IRI_18.EC.	~~	IRI_15.PT.
+MR_8	~~	MR_11
+IRI_4.EC.	~~	IRI_3.PT.
+AM_2	~~	AM_6
+AM_2	~~	AM_10
+MR_4	~~	MR_5
+AM_4	~~	AM_10
+IRI_28.PT	~~	IRI_25.PT
+AM_1	~~	AM_8
+AM_7	~~	AM_9
+MR_1	~~	MR_2
+MR_2	~~	MR_3
+MR_2	~~	MR_7
+AC_1	~~	AC_11
+MR_10	~~	MR_11
+IRI_4.EC.	~~	IRI_15.PT.
+AC_6.	~~	AC_9.
+SBS_1	~~	SBS_2
+AM_5	~~	AM_9
+AN_4	~~	AN_8
+AM_13	~~	AM_14
+EXP	~	Gender
+AM_8	~~	AM_11
+MR_8	~~	MR_10
+AM_4	~~	AM_9
+AN_4	~~	AN_7
+AM_4	~~	AM_5
+AM_11	~~	AM_13
+AC_1	~~	AC_2
+AM_10	~~	AM_11
+AC_3	~~	AC_9.
+AM_1	~~	AM_13
+EXP_1	~~	EXP_3
+EXP_1	~~	EXP_2
+AM_5	~~	AM_14
+AC_4	~~	AC_9.
+IRI_9.EC	~~	IRI_11.PT
+AN_4	~~	AC_1
+AM_4	~~	AM_13
+MR_2	~~	MR_5
+AM_5	~~	AM_11
+AC_2	~~	AC_4
+AM_5	~~	AM_13
+AN_2	~~	AN_3
+AC_4	~~	AC_6.
+AN_6	~~	AN_7
+AM_2	~~	AM_3
+AM_5	~~	AM_7
+AN_1	~~	AN_3
+AM_11	~~	AM_14
+MR_6	~~	MR_7
+IRI_9.EC	~~	IRI_8.PT
+MR_7	~~	MR_9
+MR_2	~~	MR_4
+AM_1	~~	AM_4
+IRI_18.EC.	~~	IRI_25.PT
+EDU	~	Gender
+AM_8	~~	AM_14
+AM_3	~~	AM_4
+IRI_2.EC	~~	IRI_14.EC.
+AC_6.	~~	AC_11
+AN_7	~~	AN_8
+MR_9	~~	MR_12
+AC_1	~~	AC_6.
+MR_3	~~	MR_5
+MR_7	~~	MR_10
+MR_7	~~	MR_8
+MR_3	~~	MR_7
+AN_8	~~	AC_1
+AM_7	~~	AM_13
+AC_4	~~	AC_7
+MR_1	~~	MR_3
+MR_7	~~	MR_11
+AM_8	~~	AM_13
+AM_9	~~	AM_13
+MR_3	~~	MR_4
+AC_10	~~	AC_11
+MR_9	~~	MR_13
+AN_5	~~	AN_6
+AM_4	~~	AM_6
+AN_4	~~	AC_6.
+MR_6	~~	MR_10
+AN_2	~~	AC_6.
+MR_11	~~	IRI_21.PT
+AN_8	~~	AC_11
+AM_8	~~	AM_12
+AC_2	~~	AC_9.
+MR_13	~~	AN_7
+MR_11	~~	AC_1
+AC_8	~~	AC_11
+IRI.PT	~~	EXP
+AC_2	~~	AC_8
+AM_8	~~	AM_10
+
+EXP_1	~~	Gender
+EXP_3	~~	EDU
+
+AM_1	~~	AM_6
+AC_2	~~	AC_6.
+AN_4	~~	AC_11
+AC_8	~~	AC_9.
+AC_2	~~	AC_10
+
+
+
+
+AM_3	~~	AM_9
+AC_1	~~	AC_9.
+
+
+AN_1	~~	AC_6.
+AM_10	~~	AM_13
+AM_4	~~	AM_12
+AN_3	~~	AN_4
+
+
+IRI_22.EC	~~	IRI_3.PT.
+AN_2	~~	AN_4
+MR_3	~~	AC_3
+
+SBS_2	~~	SBS_4
+MR_13	~~	AM_1
+AM_13	~~	IRI_28.PT
+AC_9.	~~	SBS_1
+SBS_1	~~	AM_4
+MR_11	~~	IRI_18.EC.
+MR_6	~~	MR_8
+MR_9	~~	AM_7
+IRI_28.PT	~~	IRI_8.PT
+MR_13	~~	IRI_22.EC
+IRI_3.PT.	~~	IRI_8.PT
+AM_1	~~	AM_15
+
+IRI_9.EC	~~	IRI_18.EC.
+MR_6	~~	MR_12
+SBS_3	~~	SBS_4
+MR_6	~~	MR_11
+
+AC_1	~~	AM_2
+AM_14	~~	AM_15
+
+
+AC_7	~~	AC_9.
+SBS_5	~~	IRI_4.EC.
+SBS_5	~~	AM_8
+
+SBS_6	~~	AM_11
+IRI_8.PT	~~	IRI_11.PT
+
+
+IRI_18.EC.	~~	IRI_28.PT
+IRI_11.PT	~~	IRI_21.PT
+MR_6	~~	AM_15
+SBS_6	~~	AM_2
+
+AN_4	~~	AM_12
+AN_4	~~	SBS_1
+
+AC_2	~~	AC_11
+AC_6.	~~	AC_8
+
+SBS_1	~~	IRI_18.EC.
+AC_6.	~~	AM_11
+AC_1	~~	AC_7
+IRI_22.EC	~~	IRI_25.PT
+
+MR_2	~~	IRI_15.PT.
+AN_2	~~	AC_10
+
+MR_9	~~	MR_11
+AN_8	~~	AC_7
+
+
+AN_1	~~	AC_11
+
+AM_3	~~	AM_14
+AC_4	~~	AC_10
+AC_10	~~	AM_1
+AN_2	~~	IRI_11.PT
+MR_6	~~	AM_12
+IRI_4.EC.	~~	IRI_22.EC
+AC_3	~~	AC_8
+
+SBS_2	~~	IRI_25.PT
+AC_7	~~	AC_8
+AN_3	~~	AM_4
+AN_3	~~	AC_9.
+
+AM_3	~~	AM_5
+AN_1	~~	AN_4
+
+MR_8	~~	IRI_18.EC.
+
+AN_4	~~	AM_2
+
+
+
+AN_2	~~	AN_7
+AC_6.	~~	AM_10
+AN_3	~~	AN_7
+
+AM_6	~~	AM_13
+IRI_22.EC	~~	IRI_28.PT
+
+IRI_3.PT.	~~	IRI_11.PT
+AM_7	~~	AM_12
+MR_10	~~	MR_13
+AM_3	~~	AM_8
+
+IRI_2.EC	~~	IRI_21.PT
+AM_9	~~	AM_10
+
+AN_1	~~	AN_7
+
+AM_3	~~	AM_11
+
+AM_13	~~	AM_15
+MR_7	~~	IRI_18.EC.
+
+AM_2	~~	AM_11
+AN_8	~~	AC_9.
+IRI_18.EC.	~~	IRI_22.EC
+
+AN_7	~~	AC_6.
+AM_12	~~	AM_13
+IRI_9.EC	~~	IRI_28.PT
+
+MR_10	~~	MR_12
+MR_13	~~	AM_3
+
+
+
+AM_2	~~	AM_13
+AM_12	~~	AM_14
+
+AN_5	~~	AC_9.
+AN_6	~~	AC_10
+AN_1	~~	AC_9.
+
+AM_6	~~	AM_8
+AM_9	~~	AM_11
+AN_8	~~	AC_10
+AM_8	~~	IRI_4.EC.
+AM_2	~~	AM_8
+
+SBS_2	~~	SBS_5
+
+AM_3	~~	AM_13
+MR_2	~~	AM_8
+MR_7	~~	AM_5
+IRI_4.EC.	~~	IRI_28.PT
+IRI_14.EC.	~~	IRI_28.PT
+MR_7	~~	IRI_21.PT
+
+AC_3	~~	AC_4
+
+
+MR_6	~~	MR_9
+AC_10	~~	AM_6
+AC_6.	~~	SBS_1
+AC_4	~~	AC_5
+MR_7	~~	IRI_2.EC
+AM_10	~~	IRI_9.EC
+AC_9.	~~	AM_10
+MR_4	~~	MR_11
+AN_4	~~	AN_6
+AC_9.	~~	SBS_2
+IRI_3.PT.	~~	IRI_21.PT
+MR_1	~~	AN_2
+AC_1	~~	AM_10
+AC_3	~~	AM_10
+MR_9	~~	IRI_21.PT
+
+
+
+AN_5	~~	IRI_4.EC.
+#AN_7	~~	EXP_1
+AN_8	~~	AM_4
+AC_5	~~	AM_1
+AM_4	~~	AM_15
+#IRI_15.PT.	~~	EXP_2
+AC_10	~~	IRI_28.PT
+MR_8	~~	IRI_3.PT.
+AC_11	~~	AM_13
+
+
+AM_1	~~	AM_3
+IRI_4.EC.	~~	IRI_25.PT
+AC_3	~~	AM_7
+MR_8	~~	SBS_4
+IRI_15.PT.	~~	IRI_25.PT
+MR_11	~~	IRI_15.PT.
+MR_3	~~	AM_8
+AN_3	~~	AC_11
+
+MR_13	~~	AC_10
+AN_4	~~	AC_7
+MR_11	~~	IRI_14.EC.
+MR_12	~~	AM_4
+AC_6.	~~	AM_12
+MR_2	~~	AC_5
+AN_4	~~	SBS_3
+
+
+
+MR_13	~~	SBS_1
+#IRI_3.PT.	~~	EXP_2
+AM_7	~~	AM_15
+SBS_6	~~	IRI_25.PT
+MR_9	~~	AN_5
+AM_1	~~	IRI_18.EC.
+
+AN_6	~~	IRI_3.PT.
+SBS_4	~~	AM_14
+AM_7	~~	AM_11
+AN_6	~~	AC_6.
+
+AC_6.	~~	AC_10
+MR_7	~~	AN_3
+AN_3	~~	AC_6.
+MR_2	~~	SBS_2
+SBS_1	~~	AM_15
+MR_12	~~	AC_3
+AM_5	~~	AM_12
+AC_2	~~	SBS_1
+
+MR_11	~~	AC_9.
+MR_5	~~	AN_1
+MR_9	~~	AM_3
+
+AM_1	~~	IRI_3.PT.
+AC_6.	~~	SBS_6
+AN_3	~~	IRI_25.PT
+SBS_1	~~	AM_1
+
+AC_1	~~	AC_4
+MR_7	~~	AC_3
+MR_8	~~	IRI_2.EC
+
+AC_2	~~	IRI_2.EC
+SBS_6	~~	IRI_4.EC.
+AC_9.	~~	IRI_3.PT.
+
+
+AM_6	~~	IRI_21.PT
+MR_11	~~	AM_10
+AC_1	~~	AC_10
+AN_8	~~	AM_10
+SBS_5	~~	SBS_6
+MR_7	~~	IRI_8.PT
+
+
+AN_2	~~	AN_8
+MR_3	~~	AN_5
+
+AN_8	~~	IRI_3.PT.
+
+AC_11	~~	IRI_3.PT.
+AN_2	~~	AC_7
+AN_3	~~	AC_5
+AM_11	~~	AM_15
+MR_1	~~	AM_13
+SBS_5	~~	AM_7
+AN_4	~~	AM_4
+AN_2	~~	AC_9.
+MR_12	~~	AN_8
+
+AC_11	~~	AM_2
+
+MR_12	~~	IRI_11.PT
+AC_3	~~	AC_10
+SBS_1	~~	AM_7
+AN_2	~~	SBS_1
+AM_12	~~	IRI_21.PT
+MR_11	~~	AC_11
+MR_3	~~	AN_6
+AM_2	~~	IRI_22.EC
+AC_9.	~~	AM_5
+AC_4	~~	IRI_18.EC.
+MR_5	~~	AN_4
+AM_1	~~	IRI_15.PT.
+
+AM_1	~~	IRI_9.EC
+MR_10	~~	IRI_15.PT.
+MR_10	~~	AM_15
+
+
+MR_5	~~	AC_11
+SBS_1	~~	IRI_15.PT.
+MR_11	~~	AM_1
+MR_4	~~	AM_4
+SBS_3	~~	AM_2
+AM_4	~~	IRI_14.EC.
+
+
+AN_6	~~	AM_15
+AC_2	~~	IRI_25.PT
+AN_7	~~	AM_4
+AN_8	~~	AM_3
+
+AM_9	~~	IRI_20.EC
+IRI_9.EC	~~	IRI_22.EC
+MR_9	~~	AN_1
+SBS_3	~~	SBS_5
+MR_10	~~	IRI_8.PT
+
+MR_10	~~	IRI_2.EC
+
+AC_7	~~	IRI_18.EC.
+MR_12	~~	SBS_5
+MR_5	~~	AC_5
+MR_13	~~	SBS_4
+MR_6	~~	IRI_18.EC.
+
+
+AC_1	~~	IRI_9.EC
+AM_9	~~	IRI_22.EC
+MR_8	~~	AC_5
+AC_6.	~~	AM_3
+
+AC_5	~~	IRI_20.EC
+
+AN_4	~~	AC_8
+AN_4	~~	AM_13
+AM_13	~~	IRI_22.EC
+AC_4	~~	AC_11
+AC_3	~~	IRI_3.PT.
+AC_4	~~	AM_12
+MR_12	~~	AC_8
+AN_2	~~	AM_9
+
+AN_4	~~	IRI_25.PT
+AN_8	~~	IRI_8.PT
+
+AC_4	~~	IRI_15.PT.
+
+SBS_1	~~	IRI_3.PT.
+AC_3	~~	AM_12
+IRI_28.PT	~~	IRI_15.PT.
+MR_12	~~	AM_1
+SBS_5	~~	IRI_2.EC
+MR_12	~~	IRI_8.PT
+AC_8	~~	AM_7
+MR_3	~~	IRI_4.EC.
+MR_12	~~	AN_3
+AC_1	~~	AM_3
+
+
+AC_11	~~	SBS_1
+AC_1	~~	IRI_21.PT
+AN_5	~~	SBS_4
+MR_7	~~	AN_6
+MR_5	~~	AM_6
+MR_1	~~	SBS_5
+AM_4	~~	IRI_28.PT
+
+MR_9	~~	AC_11
+MR_12	~~	IRI_18.EC.
+AC_3	~~	AM_11
+SBS_1	~~	IRI_22.EC
+AM_14	~~	IRI_14.EC.
+AM_4	~~	IRI_3.PT.
+AM_2	~~	IRI_2.EC
+
+MR_13	~~	AM_4
+IRI_2.EC	~~	IRI_3.PT.
+
+
+AM_3	~~	AM_6
+AN_3	~~	IRI_15.PT.
+AN_6	~~	AM_13
+MR_12	~~	AN_5
+MR_11	~~	AC_2
+
+MR_8	~~	AN_6
+MR_7	~~	AM_7
+
+MR_11	~~	IRI_3.PT.
+AC_1	~~	IRI_28.PT
+AC_9.	~~	AM_3
+MR_10	~~	SBS_2
+AC_8	~~	SBS_2
+MR_13	~~	AM_11
+AC_2	~~	AM_12
+MR_2	~~	IRI_28.PT
+AC_2	~~	IRI_28.PT
+AM_4	~~	IRI_18.EC.
+MR_5	~~	AM_4
+AC_11	~~	AM_14
+MR_1	~~	SBS_1
+
+AM_7	~~	IRI_22.EC
+AN_6	~~	SBS_4
+AC_6.	~~	AM_13
+IRI_9.EC	~~	IRI_14.EC.
+AC_8	~~	AM_4
+MR_8	~~	AC_9.
+AC_2	~~	AM_1
+MR_8	~~	AC_10
+AC_6.	~~	AM_4
+
+
+MR_4	~~	AN_6
+AM_6	~~	IRI_11.PT
+AM_3	~~	IRI_15.PT.
+MR_13	~~	IRI_28.PT
+MR_9	~~	AM_10
+AC_7	~~	AM_1
+AC_6.	~~	AM_2
+MR_7	~~	AN_1
+AN_6	~~	AC_1
+
+AN_1	~~	AN_6
+AC_5	~~	AM_5
+MR_2	~~	IRI_3.PT.
+MR_11	~~	AN_5
+IRI_2.EC	~~	IRI_8.PT
+SBS_1	~~	AM_11
+AC_9.	~~	AC_10
+AM_8	~~	AM_15
+
+IRI_2.EC	~~	IRI_4.EC.
+AN_3	~~	IRI_28.PT
+AM_5	~~	AM_15
+
+AC_1	~~	AM_6
+AC_7	~~	SBS_6
+AC_7	~~	AM_4
+MR_4	~~	MR_10
+
+MR_11	~~	IRI_8.PT
+MR_12	~~	SBS_4
+
+
+
+AM_1	~~	AM_14
+AN_4	~~	AM_15
+SBS_6	~~	AM_10
+AN_1	~~	AN_5
+SBS_5	~~	IRI_18.EC.
+AC_11	~~	IRI_18.EC.
+AM_3	~~	IRI_18.EC.
+AC_5	~~	AC_7
+AC_9.	~~	IRI_14.EC.
+MR_13	~~	AC_8
+AC_5	~~	AM_15
+AC_2	~~	AM_2
+AC_11	~~	IRI_9.EC
+AN_2	~~	AM_8
+MR_2	~~	SBS_1
+AC_8	~~	AM_2
+SBS_5	~~	IRI_3.PT.
+AN_5	~~	AN_7
+AN_4	~~	AC_2
+MR_1	~~	AC_5
+MR_6	~~	AM_9
+AC_4	~~	AC_8
+
+
+AM_11	~~	IRI_21.PT
+MR_1	~~	SBS_4
+AN_4	~~	AC_9.
+AC_11	~~	IRI_25.PT
+AC_1	~~	SBS_6
+AN_4	~~	AC_4
+AC_8	~~	SBS_5
+MR_6	~~	IRI_25.PT
+AC_8	~~	AC_10
+MR_13	~~	IRI_8.PT
+MR_8	~~	AM_12
+AC_7	~~	IRI_20.EC
+MR_2	~~	AC_9.
+#AC	~~	IRI.PT
+MR_9	~~	AC_1
+
+AM_10	~~	AM_14
+MR_1	~~	AM_12
+AC_5	~~	AM_9
+AC_10	~~	IRI_4.EC.
+AC_8	~~	AM_8
+AC_4	~~	AM_11
+AN_8	~~	IRI_18.EC.
+AC_3	~~	SBS_2
+MR_4	~~	AM_9
+AC_10	~~	SBS_5
+AN_7	~~	IRI_2.EC
+
+
+AC_4	~~	IRI_14.EC.
+MR_9	~~	AN_3
+MR_8	~~	AN_7
+MR_2	~~	IRI_25.PT
+
+MR_3	~~	AC_11
+AC_6.	~~	AM_15
+MR_7	~~	SBS_4
+
+MR_1	~~	MR_6
+MR_9	~~	AN_2
+AC_1	~~	AC_3
+
+
+AN_7	~~	AM_7
+MR_13	~~	IRI_18.EC.
+IRI_2.EC	~~	IRI_28.PT
+MR_1	~~	AN_4
+
+MR_4	~~	MR_9
+AN_7	~~	AC_9.
+AN_2	~~	AC_5
+
+MR_5	~~	IRI_22.EC
+SBS_5	~~	AM_13
+SBS_6	~~	AM_4
+IRI_21.PT	~~	IRI_25.PT
+AC_11	~~	SBS_4
+AC_1	~~	AM_9
+AN_7	~~	AM_14
+MR_3	~~	IRI_21.PT
+SBS_1	~~	AM_9
+MR_3	~~	AC_1
+AC_5	~~	IRI_8.PT
+AM_7	~~	AM_10
+MR_11	~~	AC_7
+AN_6	~~	AC_9.
+AC_5	~~	IRI_18.EC.
+
+
+
+AM_5	~~	IRI_22.EC
+AC_10	~~	AM_9
+SBS_2	~~	AM_11
+AN_3	~~	AM_3
+MR_7	~~	IRI_4.EC.
+AM_14	~~	IRI_22.EC
+AN_1	~~	AM_1
+AN_2	~~	AM_4
+
+AN_2	~~	AM_3
+AC_10	~~	AM_10
+MR_5	~~	AN_6
+AC_10	~~	IRI_9.EC
+
+
+MR_9	~~	AM_12
+AC_1	~~	IRI_2.EC
+AC_3	~~	IRI_14.EC.
+AC_4	~~	AM_5
+MR_8	~~	AM_5
+MR_8	~~	MR_9
+AC_5	~~	AC_9.
+MR_11	~~	AC_3
+SBS_2	~~	AM_9
+AC_4	~~	AM_4
+MR_9	~~	IRI_3.PT.
+
+AM_1	~~	IRI_2.EC
+MR_10	~~	IRI_22.EC
+AC_6.	~~	SBS_4
+AN_6	~~	AM_14
+MR_12	~~	AN_1
+AC_10	~~	IRI_8.PT
+
+AC_10	~~	IRI_22.EC
+MR_6	~~	AC_5
+MR_3	~~	IRI_9.EC
+MR_7	~~	IRI_9.EC
+IRI_14.EC.	~~	IRI_25.PT
+MR_10	~~	SBS_5
+AM_7	~~	AM_8
+
+MR_1	~~	AC_3
+MR_8	~~	IRI_11.PT
+AN_2	~~	AM_5
+AC_7	~~	AM_14
+MR_13	~~	AM_13
+AM_10	~~	IRI_21.PT
+SBS_4	~~	AM_4
+SBS_2	~~	IRI_4.EC.
+MR_10	~~	AN_7
+MR_4	~~	AM_5
+AN_5	~~	IRI_2.EC
+AC_3	~~	AM_14
+AN_2	~~	SBS_2
+MR_4	~~	IRI_8.PT
+
+AC_1	~~	IRI_4.EC.
+AC_10	~~	IRI_15.PT.
+MR_7	~~	IRI_14.EC.
+MR_7	~~	SBS_2
+AC_8	~~	AM_1
+AC_6.	~~	AM_8
+AN_8	~~	IRI_4.EC.
+
+AM_10	~~	IRI_28.PT
+MR_10	~~	IRI_18.EC.
+
+MR_3	~~	IRI_2.EC
+MR_9	~~	AM_8
+SBS_4	~~	AM_8
+AN_4	~~	AM_10
+MR_11	~~	AC_10
+AC_2	~~	AM_5
+AM_9	~~	IRI_2.EC
+AM_9	~~	IRI_21.PT
+AM_4	~~	IRI_4.EC.
+MR_6	~~	AC_6.
+AN_4	~~	AM_7
+
+AN_1	~~	SBS_1
+SBS_2	~~	AM_1
+AM_5	~~	AM_6
+AN_3	~~	SBS_6
+MR_11	~~	IRI_20.EC
+AC_5	~~	AM_3
+AC_1	~~	IRI_14.EC.
+SBS_3	~~	IRI_20.EC
+MR_1	~~	AM_8
+
+
+IRI_4.EC.	~~	IRI_9.EC
+SBS_4	~~	IRI_4.EC.
+IRI_9.EC	~~	IRI_21.PT
+
+
+
+AM_14	~~	IRI_28.PT
+AC_6.	~~	AM_1
+MR_11	~~	AC_5
+AN_1	~~	AM_4
+AN_2	~~	IRI_22.EC
+
+
+AC_5	~~	AC_8
+MR_13	~~	IRI_15.PT.
+AC_3	~~	SBS_3
+
+AN_6	~~	AC_8
+MR_6	~~	AC_10
+
+
+MR_10	~~	AM_13
+SBS_6	~~	AM_13
+AN_3	~~	IRI_4.EC.
+AC_11	~~	SBS_6
+
+
+MR_2	~~	MR_9
+AN_1	~~	AC_4
+SBS_2	~~	SBS_3
+MR_9	~~	AM_14
+AC_2	~~	AM_14
+AC_7	~~	IRI_3.PT.
+AN_8	~~	AM_13
+AN_6	~~	IRI_20.EC
+AM_5	~~	IRI_28.PT
+AC_7	~~	AC_11
+AC_8	~~	IRI_11.PT
+MR_9	~~	AC_7
+MR_2	~~	AC_1
+IRI_20.EC	~~	IRI_8.PT
+AC_1	~~	IRI_11.PT
+
+
+AC_1	~~	SBS_1
+SBS_4	~~	IRI_3.PT.
+AM_14	~~	IRI_4.EC.
+MR_11	~~	AC_8
+
+
+AN_7	~~	AC_10
+MR_1	~~	AC_2
+MR_7	~~	AC_5
+AC_11	~~	IRI_20.EC
+AM_6	~~	IRI_22.EC
+AN_6	~~	IRI_21.PT
+SBS_4	~~	IRI_22.EC
+AM_11	~~	AM_12
+AN_7	~~	AM_15
+
+MR_1	~~	AN_7
+AC_8	~~	IRI_14.EC.
+AC_9.	~~	IRI_4.EC.
+
+SBS_1	~~	IRI_20.EC
+AN_1	~~	SBS_4
+AC_8	~~	SBS_6
+MR_7	~~	IRI_22.EC
+MR_2	~~	AN_6
+MR_10	~~	AM_12
+SBS_1	~~	IRI_25.PT
+
+
+##
+
+
+MR_1	~~	IRI_4.EC.
+MR_9	~~	IRI_25.PT
+AC_3	~~	IRI_28.PT
+MR_9	~~	AM_15
+AM_12	~~	IRI_14.EC.
+MR_2	~~	SBS_3
+MR_8	~~	AN_1
+AC_11	~~	IRI_22.EC
+MR_3	~~	AM_3
+AC_6.	~~	SBS_2
+AC_4	~~	AM_14
+MR_10	~~	AM_11
+AN_7	~~	AC_7
+AN_5	~~	AC_2
+MR_11	~~	IRI_28.PT
+IRI_20.EC	~~	IRI_25.PT
+MR_1	~~	AM_2
+MR_3	~~	AM_1
+MR_13	~~	SBS_5
+MR_13	~~	AN_2
+MR_3	~~	IRI_28.PT
+AC_8	~~	IRI_25.PT
+AN_6	~~	SBS_5
+AN_3	~~	IRI_14.EC.
+AM_7	~~	IRI_20.EC
+AC_8	~~	IRI_20.EC
+AN_4	~~	SBS_6
+MR_9	~~	AM_2
+MR_13	~~	AC_7
+AM_1	~~	IRI_22.EC
+AC_7	~~	AM_3
+MR_1	~~	AC_4
+MR_2	~~	MR_13
+SBS_6	~~	AM_14
+AN_5	~~	AC_6.
+MR_4	~~	AM_13
+AN_4	~~	IRI_8.PT
+MR_11	~~	AN_7
+MR_6	~~	IRI_11.PT
+AN_8	~~	AM_12
+AC_11	~~	IRI_4.EC.
+AM_11	~~	IRI_15.PT.
+
+SBS_1	~~	IRI_11.PT
+
+
+
+AN_2	~~	SBS_6
+MR_12	~~	AC_6.
+AM_2	~~	IRI_11.PT
+IRI_9.EC	~~	IRI_15.PT.
+SBS_5	~~	AM_5
+AC_6.	~~	IRI_20.EC
+SBS_2	~~	IRI_20.EC
+SBS_2	~~	IRI_21.PT
+AM_6	~~	IRI_3.PT.
+MR_9	~~	SBS_2
+MR_6	~~	AM_8
+SBS_3	~~	SBS_6
+AN_7	~~	AC_11
+MR_11	~~	IRI_2.EC
+AN_3	~~	IRI_20.EC
+MR_6	~~	SBS_2
+MR_1	~~	MR_12
+AN_4	~~	IRI_22.EC
+
+AN_7	~~	IRI_25.PT
+AC_8	~~	IRI_18.EC.
+AM_10	~~	IRI_2.EC
+MR_8	~~	AN_4
+
+
+
+MR_4	~~	AC_9.
+AN_2	~~	IRI_20.EC
+AN_1	~~	AC_7
+AN_5	~~	AM_1
+MR_6	~~	AN_4
+
+
+AM_11	~~	IRI_3.PT.
+IRI_18.EC.	~~	IRI_8.PT
+AC_11	~~	AM_3
+AC_6.	~~	AM_6
+AN_2	~~	IRI_21.PT
+
+
+AM_1	~~	IRI_20.EC
+
+AC_10	~~	AM_8
+AN_3	~~	IRI_18.EC.
+MR_6	~~	SBS_5
+MR_13	~~	IRI_3.PT.
+MR_2	~~	IRI_2.EC
+MR_10	~~	AM_14
+AN_3	~~	AM_9
+AC_7	~~	AM_15
+AC_8	~~	IRI_4.EC.
+SBS_4	~~	IRI_11.PT
+AC_5	~~	AC_11
+AM_6	~~	IRI_15.PT.
+MR_9	~~	IRI_15.PT.
+SBS_5	~~	IRI_14.EC.
+MR_5	~~	MR_6
+MR_8	~~	AC_7
+MR_13	~~	AC_2
+AC_1	~~	SBS_4
+AN_6	~~	IRI_4.EC.
+AN_7	~~	IRI_14.EC.
+SBS_3	~~	IRI_18.EC.
+AC_9.	~~	SBS_6
+
+AC_1	~~	SBS_2
+AC_11	~~	IRI_2.EC
+AC_6.	~~	SBS_5
+
+AM_11	~~	IRI_4.EC.
+MR_4	~~	IRI_9.EC
+AC_8	~~	IRI_8.PT
+AC_4	~~	SBS_1
+AC_6.	~~	IRI_22.EC
+MR_12	~~	AM_10
+MR_9	~~	AC_3
+AC_6.	~~	IRI_11.PT
+MR_5	~~	IRI_14.EC.
+MR_6	~~	AC_4
+AM_13	~~	IRI_11.PT
+AC_7	~~	AM_5
+
+MR_1	~~	SBS_2
+AN_7	~~	AC_5
+AC_2	~~	AM_15
+MR_12	~~	AN_7
+MR_1	~~	IRI_21.PT
+
+
+MR_12	~~	AN_2
+MR_4	~~	AC_7
+MR_11	~~	IRI_9.EC
+AC_1	~~	IRI_25.PT
+
+
+
+MR_5	~~	MR_10
+MR_12	~~	IRI_25.PT
+AM_5	~~	IRI_15.PT.
+AC_3	~~	AC_7
+MR_3	~~	IRI_20.EC
+AN_2	~~	AM_2
+AN_7	~~	IRI_21.PT
+MR_5	~~	AC_10
+AN_6	~~	AM_12
+AN_5	~~	AC_1
+AN_3	~~	AM_15
+MR_11	~~	SBS_3
+AN_2	~~	AC_4
+AC_4	~~	AM_7
+AN_4	~~	IRI_4.EC.
+MR_7	~~	SBS_1
+MR_8	~~	AM_3
+MR_10	~~	AC_10
+SBS_2	~~	IRI_3.PT.
+MR_8	~~	AC_1
+AM_5	~~	IRI_18.EC.
+
+MR_8	~~	IRI_25.PT
+AM_12	~~	IRI_11.PT
+
+AC_9.	~~	AM_11
+AN_2	~~	SBS_5
+
+
+MR_1	~~	IRI_15.PT.
+AC_4	~~	AM_6
+AN_1	~~	AM_8
+MR_11	~~	SBS_4
+AM_8	~~	IRI_3.PT.
+AN_3	~~	AM_5
+AC_6.	~~	SBS_3
+MR_6	~~	AC_9.
+MR_6	~~	AM_2
+
+AN_4	~~	IRI_18.EC.
+MR_4	~~	IRI_14.EC.
+AM_14	~~	IRI_18.EC.
+AM_7	~~	IRI_11.PT
+AC_10	~~	SBS_3
+AN_3	~~	SBS_2
+AN_6	~~	SBS_3
+AC_3	~~	SBS_6
+MR_10	~~	SBS_1
+AN_6	~~	AC_5
+AN_2	~~	AM_11
+
+AN_6	~~	IRI_22.EC
+SBS_2	~~	AM_4
+
+#####
+
+AN_6	~~	AN_8
+MR_11	~~	AM_12
+AN_3	~~	AM_7
+AM_8	~~	IRI_20.EC
+AC_9.	~~	IRI_18.EC.
+IRI_20.EC	~~	IRI_15.PT.
+MR_5	~~	MR_11
+MR_12	~~	IRI_2.EC
+
+AN_2	~~	AN_6
+MR_2	~~	AN_4
+MR_9	~~	AM_1
+AM_4	~~	IRI_20.EC
+AN_1	~~	AC_5
+AC_3	~~	IRI_21.PT
+SBS_1	~~	IRI_9.EC
+AN_7	~~	SBS_5
+AM_1	~~	IRI_14.EC.
+SBS_1	~~	SBS_3
+AM_12	~~	IRI_18.EC.
+AN_6	~~	IRI_2.EC
+
+SBS_3	~~	IRI_3.PT.
+AC_5	~~	IRI_28.PT
+AC_9.	~~	AM_14
+AN_1	~~	AC_1
+AC_6.	~~	AM_9
+MR_10	~~	AM_1
+MR_10	~~	AN_5
+AM_2	~~	IRI_3.PT.
+AM_1	~~	AM_5
+AN_3	~~	AC_1
+MR_6	~~	IRI_9.EC
+MR_6	~~	AC_1
+AN_3	~~	AC_8
+MR_1	~~	MR_9
+
+AN_8	~~	AM_7
+AM_7	~~	IRI_2.EC
+AC_1	~~	AM_13
+AM_6	~~	AM_14
+AC_8	~~	AM_14
+
+AN_1	~~	IRI_3.PT.
+AN_7	~~	IRI_18.EC.
+AC_7	~~	AM_6
+AN_8	~~	AC_3
+MR_9	~~	AN_7
+AM_9	~~	AM_12
+MR_9	~~	MR_10
+
+SBS_6	~~	IRI_8.PT
+SBS_4	~~	AM_1
+MR_5	~~	AC_8
+AC_2	~~	IRI_4.EC.
+MR_13	~~	AM_10
+MR_12	~~	AC_4
+MR_3	~~	AN_4
+AC_1	~~	AM_1
+AM_9	~~	IRI_8.PT
+AN_5	~~	AM_2
+SBS_3	~~	IRI_14.EC.
+MR_3	~~	AN_8
+AM_9	~~	IRI_4.EC.
+
+
+MR_13	~~	IRI_9.EC
+AN_4	~~	IRI_21.PT
+AN_5	~~	AC_5
+##############################0.96
+
+MR_7	~~	AC_1
+MR_3	~~	SBS_2
+MR_3	~~	MR_10
+AM_8	~~	IRI_2.EC
+MR_4	~~	MR_8
+SBS_4	~~	AM_15
+MR_5	~~	IRI_28.PT
+MR_5	~~	IRI_9.EC
+
+SBS_5	~~	AM_9
+SBS_2	~~	AM_3
+IRI_18.EC.	~~	IRI_21.PT
+AM_1	~~	AM_12
+AC_7	~~	IRI_21.PT
+SBS_1	~~	SBS_6
+AM_2	~~	IRI_8.PT
+IRI_20.EC	~~	IRI_21.PT
+AN_5	~~	IRI_11.PT
+
+AN_8	~~	IRI_2.EC
+SBS_1	~~	AM_3
+AN_5	~~	AC_3
+SBS_3	~~	IRI_2.EC
+AC_9.	~~	IRI_11.PT
+AC_4	~~	AM_13
+AM_6	~~	IRI_18.EC.
+MR_13	~~	AM_6
+AN_5	~~	AC_8
+AC_5	~~	IRI_2.EC
+AM_1	~~	IRI_4.EC.
+MR_10	~~	AC_9.
+MR_3	~~	AM_13
+MR_6	~~	AC_7
+AM_3	~~	IRI_3.PT.
+AN_8	~~	IRI_11.PT
+AM_5	~~	IRI_14.EC.
+SBS_2	~~	AM_8
+
+MR_8	~~	IRI_28.PT
+MR_6	~~	SBS_1
+MR_12	~~	IRI_15.PT.
+AN_1	~~	IRI_8.PT
+
+
+AC_7	~~	SBS_3
+AC_3	~~	AM_2
+MR_9	~~	AC_8
+MR_7	~~	AC_9.
+AC_6.	~~	IRI_9.EC
+MR_3	~~	AC_7
+SBS_2	~~	AM_7
+AC_7	~~	SBS_4
+AC_9.	~~	IRI_20.EC
+MR_10	~~	AN_4
+AN_6	~~	IRI_25.PT
+AC_6.	~~	IRI_4.EC.
+AM_6	~~	IRI_8.PT
+SBS_5	~~	IRI_15.PT.
+AC_9.	~~	IRI_22.EC
+MR_11	~~	AN_3
+SBS_4	~~	IRI_9.EC
+MR_9	~~	AM_4
+AM_5	~~	IRI_9.EC
+AM_4	~~	AM_11
+AC_6.	~~	IRI_28.PT
+
+
+AC_7	~~	IRI_22.EC
+AN_6	~~	AM_3
+MR_13	~~	SBS_2
+
+AN_6	~~	IRI_11.PT
+MR_1	~~	AM_15
+AC_4	~~	IRI_25.PT
+AC_2	~~	AC_5
+MR_9	~~	AN_8
+MR_7	~~	IRI_20.EC
+IRI_9.EC	~~	IRI_3.PT.
+AM_15	~~	IRI_3.PT.
+AC_10	~~	AM_3
+MR_8	~~	AN_8
+AM_14	~~	IRI_20.EC
+AN_5	~~	AC_7
+AM_12	~~	IRI_20.EC
+AM_5	~~	AM_8
+MR_9	~~	AC_9.
+
+MR_13	~~	AM_8
+
+
+AM_6	~~	IRI_25.PT
+MR_11	~~	AM_15
+AM_11	~~	IRI_22.EC
+IRI_14.EC.	~~	IRI_21.PT
+MR_6	~~	AM_7
+IRI_9.EC	~~	IRI_20.EC
+MR_6	~~	AM_10
+SBS_1	~~	AM_8
+
+AN_1	~~	AC_10
+AM_14	~~	IRI_11.PT
+AN_2	~~	SBS_4
+AM_13	~~	IRI_20.EC
+SBS_2	~~	AM_14
+SBS_2	~~	AM_13
+
+MR_2	~~	AM_4
+AM_8	~~	IRI_22.EC
+MR_9	~~	AC_6.
+AC_7	~~	SBS_5
+AN_8	~~	AC_5
+
+AM_1	~~	AM_11
+IRI_20.EC	~~	IRI_3.PT.
+SBS_6	~~	AM_6
+MR_12	~~	SBS_6
+AM_1	~~	AM_7
+AM_2	~~	IRI_21.PT
+SBS_4	~~	SBS_5
+MR_3	~~	MR_11
+AM_6	~~	AM_7
+AN_2	~~	SBS_3
+IRI_20.EC	~~	IRI_11.PT
+AM_6	~~	AM_11
+IRI_2.EC	~~	IRI_20.EC
+AM_5	~~	IRI_2.EC
+MR_11	~~	IRI_25.PT
+IRI_22.EC	~~	IRI_15.PT.
+AN_2	~~	AN_5
+AN_1	~~	IRI_20.EC
+AN_5	~~	IRI_25.PT
+SBS_6	~~	IRI_20.EC
+IRI_14.EC.	~~	IRI_22.EC
+AC_10	~~	SBS_1
+MR_11	~~	AN_8
+AN_2	~~	IRI_25.PT
+MR_4	~~	AM_12
+AN_8	~~	AM_14
+SBS_1	~~	SBS_4
+AM_4	~~	IRI_21.PT
+AN_8	~~	AC_6.
+MR_1	~~	IRI_11.PT
+AN_5	~~	AN_8
+SBS_1	~~	AM_14
+AC_3	~~	AC_6.
+AM_15	~~	IRI_25.PT
+MR_3	~~	MR_8
+MR_11	~~	SBS_6
+MR_11	~~	AN_1
+AC_4	~~	AM_1
+MR_12	~~	IRI_21.PT
+MR_11	~~	AM_14
+AN_1	~~	AM_2
+AM_10	~~	IRI_25.PT
+AN_1	~~	AN_8
+IRI_15.PT.	~~	IRI_21.PT
+MR_11	~~	AN_6
+AC_1	~~	AC_8
+AC_6.	~~	AM_5
+AN_2	~~	IRI_28.PT
+MR_9	~~	IRI_22.EC
+AN_8	~~	IRI_21.PT
+IRI_3.PT.	~~	IRI_25.PT
+AN_3	~~	AN_6
+AM_7	~~	IRI_14.EC.
+AC_4	~~	IRI_4.EC.
+SBS_3	~~	AM_12
+AN_5	~~	SBS_3
+IRI_2.EC	~~	IRI_15.PT.
+SBS_3	~~	AM_5
+MR_13	~~	AN_5
+AN_6	~~	AC_11
+AN_6	~~	AM_10
+AN_1	~~	IRI_28.PT
+IRI_2.EC	~~	IRI_25.PT
+AC_11	~~	AM_10
+AC_8	~~	IRI_15.PT.
+MR_1	~~	AM_9
+SBS_3	~~	AM_10
+MR_5	~~	MR_9
+MR_8	~~	SBS_3
+SBS_5	~~	IRI_9.EC
+MR_3	~~	IRI_3.PT.
+MR_3	~~	IRI_18.EC.
+AN_6	~~	IRI_15.PT.
+AM_6	~~	IRI_9.EC
+AN_1	~~	SBS_6
+AC_10	~~	IRI_25.PT
+AC_2	~~	AM_13
+AN_8	~~	AM_9
+MR_9	~~	SBS_3
+MR_7	~~	SBS_6
+MR_12	~~	AC_9.
+SBS_3	~~	AM_13
+MR_6	~~	AN_3
+AN_2	~~	AC_2
+AC_10	~~	SBS_6
+MR_3	~~	MR_9
+AM_7	~~	IRI_3.PT.
+MR_12	~~	AC_7
+AM_13	~~	IRI_4.EC.
+AC_11	~~	IRI_11.PT
+AN_4	~~	AN_5
+MR_12	~~	SBS_1
+MR_3	~~	SBS_3
+AC_6.	~~	AM_7
+AC_1	~~	IRI_3.PT.
+SBS_1	~~	IRI_2.EC
+SBS_6	~~	IRI_21.PT
+AN_1	~~	AM_12
+MR_7	~~	MR_12
+AM_7	~~	IRI_21.PT
+AM_3	~~	IRI_20.EC
+AM_13	~~	IRI_9.EC
+AC_2	~~	SBS_6
+MR_10	~~	AN_3
+MR_3	~~	IRI_25.PT
+SBS_6	~~	IRI_2.EC
+AN_3	~~	AC_2
+MR_9	~~	AC_4
+SBS_6	~~	AM_7
+MR_8	~~	AN_5
+MR_9	~~	AM_6
+IRI_2.EC	~~	IRI_9.EC
+AC_3	~~	AM_4
+AM_4	~~	IRI_15.PT.
+MR_7	~~	SBS_5
+MR_2	~~	IRI_14.EC.
+MR_5	~~	AM_10
+MR_8	~~	SBS_5
+MR_12	~~	IRI_9.EC
+IRI_8.PT	~~	IRI_15.PT.
+IRI_2.EC	~~	IRI_18.EC.
+AM_15	~~	IRI_21.PT
+AC_11	~~	IRI_28.PT
+AC_1	~~	IRI_20.EC
+AM_10	~~	IRI_11.PT
+AM_15	~~	IRI_22.EC
+MR_3	~~	AC_6.
+AN_2	~~	AM_7
+IRI_14.EC.	~~	IRI_8.PT
+AM_5	~~	IRI_20.EC
+MR_1	~~	MR_11
+MR_5	~~	MR_12
+AC_3	~~	IRI_18.EC.
+AN_1	~~	SBS_3
+AM_6	~~	IRI_4.EC.
+AN_4	~~	SBS_2
+MR_5	~~	MR_8
+MR_1	~~	IRI_3.PT.
+AC_1	~~	AM_8
+AC_4	~~	AM_8
+MR_12	~~	AM_5
+AC_3	~~	AM_15
+AN_1	~~	SBS_5
+AN_4	~~	AM_11
+AC_5	~~	IRI_11.PT
+AN_3	~~	SBS_5
+AM_3	~~	IRI_9.EC
+MR_3	~~	MR_13
+MR_11	~~	SBS_1
+AC_3	~~	AM_1
+AC_11	~~	AM_1
+AN_7	~~	IRI_15.PT.
+MR_13	~~	AN_6
+MR_1	~~	AN_6
+AC_8	~~	AM_6
+MR_13	~~	IRI_20.EC
+MR_2	~~	AN_7
+AN_8	~~	SBS_6
+AM_2	~~	AM_4
+AC_4	~~	AM_15
+AC_7	~~	AM_10
+MR_5	~~	SBS_4
+AM_2	~~	AM_5
+MR_11	~~	AM_9
+MR_6	~~	AM_3
+AM_6	~~	IRI_20.EC
+MR_8	~~	IRI_21.PT
+MR_13	~~	AM_14
+AN_7	~~	AC_3
+MR_13	~~	SBS_3
+AC_8	~~	AM_10
+AM_10	~~	IRI_20.EC
+MR_12	~~	IRI_28.PT
+AM_1	~~	IRI_8.PT
+MR_11	~~	AM_13
+AC_9.	~~	AC_11
+AM_11	~~	IRI_28.PT
+AN_7	~~	SBS_4
+AN_7	~~	AM_10
+MR_6	~~	SBS_6
+SBS_4	~~	AM_11
+MR_13	~~	AC_1
+AM_3	~~	AM_12
+MR_9	~~	SBS_6
+MR_12	~~	AM_6
+SBS_4	~~	SBS_6
+MR_13	~~	AM_15
+MR_9	~~	AM_9
+MR_3	~~	MR_6
+AC_11	~~	IRI_15.PT.
+AM_7	~~	IRI_25.PT
+MR_13	~~	AN_1
+AN_3	~~	IRI_22.EC
+MR_6	~~	AM_14
+MR_7	~~	IRI_28.PT
+AM_9	~~	AM_15
+MR_6	~~	AM_1
+AC_8	~~	IRI_22.EC
+AC_9.	~~	IRI_15.PT.
+AN_5	~~	AC_11
+AN_2	~~	IRI_9.EC
+MR_8	~~	MR_12
+AC_6.	~~	AM_14
+SBS_2	~~	IRI_11.PT
+MR_5	~~	AM_1
+SBS_5	~~	AM_14
+AN_4	~~	AC_5
+MR_4	~~	MR_7
+MR_1	~~	MR_13
+AC_11	~~	IRI_8.PT
+MR_8	~~	AM_6
+MR_2	~~	AM_10
+AC_3	~~	AM_8
+AN_5	~~	IRI_14.EC.
+MR_4	~~	AC_3
+SBS_1	~~	IRI_21.PT
+MR_2	~~	IRI_20.EC
+MR_8	~~	AC_11
+AM_4	~~	IRI_22.EC
+AM_5	~~	IRI_25.PT
+MR_12	~~	SBS_3
+AC_5	~~	AM_12
+MR_2	~~	AM_13
+AC_1	~~	SBS_5
+AN_3	~~	AM_8
+MR_5	~~	IRI_11.PT
+AN_2	~~	AC_11
+AM_10	~~	IRI_15.PT.
+MR_7	~~	IRI_11.PT
+AN_8	~~	AM_1
+MR_5	~~	AM_15
+SBS_5	~~	IRI_28.PT
+MR_4	~~	MR_6
+AC_8	~~	AM_15
+AC_10	~~	IRI_3.PT.
+MR_2	~~	SBS_4
+MR_1	~~	AM_6
+AM_7	~~	IRI_8.PT
+AM_10	~~	IRI_3.PT.
+MR_7	~~	AM_3
+AM_4	~~	IRI_8.PT
+AC_2	~~	IRI_15.PT.
+SBS_4	~~	IRI_28.PT
+AC_2	~~	AM_10
+MR_4	~~	AN_8
+MR_4	~~	IRI_15.PT.
+MR_2	~~	AM_2
+AM_11	~~	IRI_25.PT
+AC_10	~~	SBS_4
+AM_11	~~	IRI_20.EC
+MR_11	~~	MR_13
+SBS_5	~~	AM_10
+AC_10	~~	AM_2
+AN_1	~~	IRI_18.EC.
+MR_12	~~	AC_10
+AC_6.	~~	IRI_3.PT.
+MR_5	~~	AN_3
+AN_8	~~	AM_6
+AM_4	~~	IRI_2.EC
+MR_13	~~	IRI_25.PT
+MR_2	~~	MR_12
+AN_5	~~	AM_7
+AC_7	~~	AM_8
+SBS_2	~~	AM_2
+MR_8	~~	AC_8
+AN_2	~~	AM_10
+MR_4	~~	MR_13
+AC_2	~~	AC_3
+AC_1	~~	AM_12
+MR_13	~~	IRI_11.PT
+MR_13	~~	AN_8
+AN_7	~~	AM_5
+AN_8	~~	IRI_22.EC
+MR_8	~~	AM_11
+AC_9.	~~	IRI_25.PT
+AN_8	~~	AC_8
+AN_3	~~	AN_5
+SBS_2	~~	IRI_2.EC
+MR_6	~~	AC_8
+AN_4	~~	AM_9
+AC_5	~~	IRI_4.EC.
+AM_9	~~	IRI_15.PT.
+SBS_4	~~	IRI_2.EC
+MR_10	~~	AC_1
+AN_3	~~	AM_2
+MR_5	~~	AM_5
+AN_5	~~	IRI_28.PT
+AC_1	~~	IRI_18.EC.
+MR_3	~~	SBS_1
+MR_4	~~	IRI_11.PT
+IRI_18.EC.	~~	IRI_20.EC
+MR_5	~~	AN_2
+SBS_1	~~	AM_6
+AM_1	~~	IRI_11.PT
+AC_5	~~	IRI_15.PT.
+AN_2	~~	AC_1
+AM_15	~~	IRI_9.EC
+IRI_4.EC.	~~	IRI_21.PT
+MR_6	~~	AN_5
+SBS_6	~~	AM_1
+AC_2	~~	AM_8
+AN_7	~~	AM_3
+MR_4	~~	SBS_5
+MR_5	~~	AC_3
+MR_4	~~	AM_8
+AN_6	~~	AM_5
+MR_7	~~	IRI_25.PT
+AN_2	~~	AM_13
+AC_4	~~	SBS_6
+MR_1	~~	IRI_14.EC.
+AC_5	~~	IRI_25.PT
+AC_6.	~~	IRI_21.PT
+AM_12	~~	IRI_3.PT.
+MR_7	~~	AN_7
+MR_8	~~	SBS_6
+AC_10	~~	AM_5
+AM_1	~~	IRI_21.PT
+MR_11	~~	AC_4
+IRI_14.EC.	~~	IRI_11.PT
+AM_9	~~	AM_14
+MR_12	~~	IRI_3.PT.
+AN_5	~~	AM_3
+MR_11	~~	AM_11
+SBS_4	~~	AM_2
+AC_2	~~	AM_3
+AC_6.	~~	AC_7
+AC_11	~~	AM_15
+AN_5	~~	SBS_1
+SBS_6	~~	IRI_9.EC
+MR_3	~~	AC_9.
+AN_1	~~	AM_14
+AN_6	~~	AM_2
+AN_4	~~	IRI_20.EC
+AN_6	~~	SBS_6
+MR_5	~~	IRI_20.EC
+AM_2	~~	IRI_25.PT
+MR_9	~~	IRI_18.EC.
+AC_11	~~	AM_7
+AC_4	~~	IRI_20.EC
+AM_1	~~	IRI_28.PT
+AC_7	~~	AM_12
+IRI_28.PT	~~	IRI_3.PT.
+MR_3	~~	IRI_8.PT
+MR_6	~~	AC_11
+AC_10	~~	SBS_2
+AC_2	~~	SBS_4
+MR_2	~~	AN_5
+AC_4	~~	AM_2
+MR_13	~~	AC_11
+MR_6	~~	SBS_3
+AM_9	~~	IRI_11.PT
+MR_9	~~	IRI_11.PT
+AN_3	~~	SBS_1
+MR_7	~~	AC_4
+MR_6	~~	IRI_22.EC
+SBS ~~ IRI.EC
+SBS ~ IRI.PT
+
+'
