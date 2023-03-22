@@ -92,7 +92,7 @@ Diff_resh <- function(jp, us){
     return(AB)
 }
 
-coef_resh <- function(x, method){
+coef_resh <- function(x, method, country_){
     coef_s <- as.data.frame(summary(x)$coefficients)
     coef_s$variable <- rownames(coef_s)
     coef_s$variable[coef_s$variable=="RHAB"] <- "Religious attendance"
@@ -113,7 +113,16 @@ coef_resh <- function(x, method){
                                            "culture*Religious attendance","culture*Religious beliefs", "culture*Anthropocentrism", "culture*merged Animism", "culture*Animism", "culture*Anthropomorphism", 
                                            "IRI_EC", "IRI_PT", "EXP","TYP", "EDU", "Age", "Gender1", "Gender2")))
     coef_s$model <- method
+    coef_s$country <- country_
+    coef_s$id <- rownames(coef_s)
     colnames(coef_s)[2] <- "Std"
+    temp <- data.frame(confint(x))
+    colnames(temp) <- c("lower", "upper")
+    
+    temp$id <- rownames(temp)
+    
+    coef_s <- merge(coef_s, temp, by="id", all=F)
+    coef_s <- coef_s[, c(8,7,6, 2,3,9,10,4,5)]
     return(coef_s)
 }
 
@@ -195,23 +204,41 @@ colnames(cor_jp__) <-  c("MR",
                            "Edu")
 cor_jp__
 
+fit_re <- function(x, method, country){
+
+rrr1 <- data.frame(x)
+rrr1$country <- country
+rrr1$model <- method
+rrr1$var <- rownames(rrr1)
+rrr1 <- rrr1[, c(2,3,4,1)]
+colnames(rrr1)[4] <- "value"
+
+return(rrr1)
+}
 
 ### regression ###
 #### US ####
 rel_us <- lm(MR ~ RHAB + SBS + IRI_PT + IRI_EC +TYP + EXP + Age+EDU + Gender1 + Gender2, data=data_us)
-coef_resh(rel_us, "religion")
-t(data.frame("R-squared"=summary(rel_us)["adj.r.squared"][[1]], "AIC"=AIC(rel_us)))
+cof1 <- coef_resh(rel_us, "religion", "US")
+rrr1 <- t(data.frame("R-squared"=summary(rel_us)["adj.r.squared"][[1]], "AIC"=AIC(rel_us)))
+rrr1 <- fit_re(rrr1, "religion", "US")
+write.table(cof1, "out/religion_us_coef.tsv", sep="\t", row.names=F)
+write.table(rrr1, "out/religion_us_fit.tsv", sep="\t", row.names=F)
 
 val_us <- lm(MR ~ AC + AN_AM + IRI_PT + IRI_EC +TYP + EXP + Age+EDU + Gender1 + Gender2, data=data_us)
-coef_resh(val_us, "value")
-t(data.frame("R-squared"=summary(val_us)["adj.r.squared"][[1]], "AIC"=AIC(val_us)))
+cof2 <- coef_resh(val_us, "value", "US")
+rrr2 <- t(data.frame("R-squared"=summary(val_us)["adj.r.squared"][[1]], "AIC"=AIC(val_us)))
+rrr2 <- fit_re(rrr2, "value", "US")
+write.table(cof2, "out/value_us_coef.tsv", sep="\t", row.names=F)
+write.table(rrr2, "out/value_us_fit.tsv", sep="\t", row.names=F)
 
 both_us <- lm(MR ~ RHAB + SBS + AC + AN_AM + IRI_PT + IRI_EC +TYP + EXP + Age+EDU + Gender1 + Gender2, data=data_us)
-coef_resh(both_us, "both")
-t(data.frame("R-squared"=summary(both_us)["adj.r.squared"][[1]], "AIC"=AIC(both_us)))
+coef_resh(both_us, "both", "US")
+(data.frame("R-squared"=summary(both_us)["adj.r.squared"][[1]], "AIC"=AIC(both_us)))
+
 
 sep_us <- lm(MR ~ AC + AN+AM + IRI_PT + IRI_EC +TYP + EXP + Age+EDU + Gender1 + Gender2, data=data_us)
-coef_resh(sep_us, "separate")
+coef_resh(sep_us, "separate", "US")
 t(data.frame("R-squared"=summary(sep_us)["adj.r.squared"][[1]], "AIC"=AIC(sep_us)))
 
 ##### model selection #####
@@ -220,25 +247,33 @@ US_kekka.AIC <- dredge(US_full_model, rank="AIC")
 US_kekka.AIC
 
 best_us <- lm(MR ~ AC + AN_AM + IRI_PT  + IRI_EC + EXP+ Gender1 , data=data_us)
-coef_resh(best_us, "best")
-t(data.frame("R-squared"=summary(best_us)["adj.r.squared"][[1]], "AIC"=AIC(best_us)))
-
+cof3 <- coef_resh(best_us, "best", "US")
+rrr3 <- t(data.frame("R-squared"=summary(best_us)["adj.r.squared"][[1]], "AIC"=AIC(best_us)))
+rrr3 <- fit_re(rrr3, "best", "US")
+write.table(cof3, "out/best_us_coef.tsv", sep="\t", row.names=F)
+write.table(rrr3, "out/best_us_fit.tsv", sep="\t", row.names=F)
 
 #### JP ####
 rel_jp <- lm(MR ~ RHAB + SBS + IRI_PT + IRI_EC +TYP + EXP + Age+EDU + Gender1 + Gender2, data=data_jp)
-coef_resh(rel_jp, "religion")
-t(data.frame("R-squared"=summary(rel_jp)["adj.r.squared"][[1]], "AIC"=AIC(rel_jp)))
+cof4 <- coef_resh(rel_jp, "religion", "JP")
+rrr4 <- t(data.frame("R-squared"=summary(rel_jp)["adj.r.squared"][[1]], "AIC"=AIC(rel_jp)))
+rrr4 <- fit_re(rrr4, "religion", "JP")
+write.table(cof4, "out/religion_jp_coef.tsv", sep="\t", row.names=F)
+write.table(rrr4, "out/religion_jp_fit.tsv", sep="\t", row.names=F)
 
 val_jp <- lm(MR ~ AC + AN_AM + IRI_PT + IRI_EC +TYP + EXP + Age+EDU + Gender1 + Gender2, data=data_jp)
-coef_resh(val_jp, "value")
-t(data.frame("R-squared"=summary(val_jp)["adj.r.squared"][[1]], "AIC"=AIC(val_jp)))
+cof5 <- coef_resh(val_jp, "value", "JP")
+rrr5 <- t(data.frame("R-squared"=summary(val_jp)["adj.r.squared"][[1]], "AIC"=AIC(val_jp)))
+rrr5 <- fit_re(rrr5, "value", "JP")
+write.table(cof5, "out/value_jp_coef.tsv", sep="\t", row.names=F)
+write.table(rrr5, "out/value_jp_fit.tsv", sep="\t", row.names=F)
 
 both_jp <- lm(MR ~ RHAB + SBS + AC + AN_AM + IRI_PT + IRI_EC +TYP + EXP + Age+EDU + Gender1 + Gender2, data=data_jp)
-coef_resh(both_jp, "both")
+coef_resh(both_jp, "both", "JP")
 t(data.frame("R-squared"=summary(both_jp)["adj.r.squared"][[1]], "AIC"=AIC(both_jp)))
 
 sep_jp <- lm(MR ~ AC + AN+AM + IRI_PT + IRI_EC +TYP + EXP + Age+EDU + Gender1 + Gender2, data=data_jp)
-coef_resh(sep_jp, "separate")
+coef_resh(sep_jp, "separate", "JP")
 t(data.frame("R-squared"=summary(sep_jp)["adj.r.squared"][[1]], "AIC"=AIC(sep_jp)))
 
 ##### model selection #####
@@ -247,7 +282,36 @@ JP_kekka.AIC <- dredge(JP_full_model, rank="AIC")
 JP_kekka.AIC 
 
 best_jp <- lm(MR ~ AC + Age + EDU+EXP+TYP +AN_AM + IRI_PT  + IRI_EC + Gender1 , data=data_jp)
-coef_resh(best_jp, "best")
-t(data.frame("R-squared"=summary(best_jp)["adj.r.squared"][[1]], "AIC"=AIC(best_jp)))
+cof6 <- coef_resh(best_jp, "best", "JP")
+rrr6 <- t(data.frame("R-squared"=summary(best_jp)["adj.r.squared"][[1]], "AIC"=AIC(best_jp)))
+rrr6 <- fit_re(rrr6, "best", "JP")
+write.table(cof6, "out/best_jp_coef.tsv", sep="\t", row.names=F)
+write.table(rrr6, "out/best_jp_fit.tsv", sep="\t", row.names=F)
+
+
+#### INTERACTION ####
+data_ <- rbind(data_us, data_jp)
+inter <- lm(MR ~ cul*(RHAB + SBS + AC + AN_AM) + IRI_PT + IRI_EC +TYP + EXP + Age+EDU + Gender1 + Gender2 , data=data_)
+cof7 <- coef_resh(inter, "interaction_all", "interaction")
+rrr7 <- t(data.frame("R-squared"=summary(inter)["adj.r.squared"][[1]], "AIC"=AIC(inter)))
+rrr7 <- fit_re(rrr7, "interaction_all", "interaction")
+write.table(cof7, "out/int_all_coef.tsv", sep="\t", row.names=F)
+write.table(rrr7, "out/int_all_fit.tsv", sep="\t", row.names=F)
+
+int_full_model <- inter
+kekka.AIC <- dredge(int_full_model, rank="AIC")
+write.table(kekka.AIC, "out/int_select.tsv", sep="\t", row.names=F)
+
+inter_best <- lm(MR ~ cul*(AC + AN_AM) + IRI_PT + IRI_EC +TYP + EXP + Age+EDU + Gender1 , data=data_)
+cof8 <- coef_resh(inter_best, "interaction_best", "interaction")
+rrr8 <- t(data.frame("R-squared"=summary(inter_best)["adj.r.squared"][[1]], "AIC"=AIC(inter_best)))
+rrr8 <- fit_re(rrr8, "interaction_best", "interaction")
+write.table(cof8, "out/int_best_coef.tsv", sep="\t", row.names=F)
+write.table(rrr8, "out/int_best_fit.tsv", sep="\t", row.names=F)
+
+write.table(rbind(cof1,cof2,cof3,cof4,cof5,cof6,cof7,cof8), "out/coef.tsv", sep="\t", row.names=F)
+write.table(rbind(rrr1,rrr2,rrr3,rrr4,rrr5,rrr6,rrr7,rrr8), "out/fit.tsv", sep="\t", row.names=F)
+
+
 
 

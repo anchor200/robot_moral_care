@@ -1,0 +1,1356 @@
+tester <- randomForest(ismany ~ weather+temperature+speed+wind_x+wind_y+year_date+hare+ame+kumori)
+tester <- randomForest(ismany ~ weather+temperature+speed+wind_x+wind_y+year_date+hare+ame+kumori, data=test)
+test <- test[!is.na(test$temperature),]
+tester <- randomForest(ismany ~ weather+temperature+speed+wind_x+wind_y+year_date+hare+ame+kumori, data=test)
+tester
+data <- readRDS("~/Downloads/akaharadaka_df.rds")
+data$ismany <- factor(data$ismany)
+test <- test[!is.na(test$temperature),]
+train <- data[data$year >= 2019, ]
+tester <- randomForest(ismany ~ weather+temperature+speed+wind_x+wind_y+year_date+hare+ame+kumori, data=test, na.action="na.omit")
+tester
+summary(tester)
+tester <- randomForest(factor(ismany) ~ weather+temperature+speed+wind_x+wind_y+year_date+hare+ame+kumori, data=test, na.action="na.omit")
+tester
+data <- readRDS("~/Downloads/akaharadaka_df.rds")
+data$datekai <- data$date - min(data$date)
+data$date
+class(data$date)
+(data$date) <- as.Date(data$date)
+data$date <- as.Date(data$yeardate)
+data$date <- as.Date(data$year_date)
+date$date
+data$date
+train <- data[data$year >= 2019, ]
+test <- test[!is.na(test$temperature),]
+tester <- randomForest(factor(ismany) ~ weather+temperature+speed+wind_x+wind_y+year_date+hare+ame+kumori, data=test, na.action="na.omit")
+train <- train[train$season=="秋", ]
+test <- test[test$season=="秋", ]
+tester <- randomForest(factor(ismany) ~ weather+temperature+speed+wind_x+wind_y+year_date+hare+ame+kumori, data=test, na.action="na.omit")
+summary(tester)
+(tester)
+tester <- randomForest(factor(ismany) ~ weather+temperature+speed+wind_x+wind_y+hare+ame+kumori, data=test, na.action="na.omit")
+(tester)
+data <- readRDS("~/Downloads/akaharadaka_df.rds")
+data$ismany <- 0
+data$ismany[data$number > 100] <- 1
+sum(data$ismany)
+train <- train[train$season=="秋", ]
+test <- test[test$season=="秋", ]
+data <- data[data$season=="秋", ]
+train <- data[data$year >= 2019, ]
+test <- data[data$year < 2019, ]
+tester <- randomForest(factor(ismany) ~ weather+temperature+speed+wind_x+wind_y+hare+ame+kumori, data=test, na.action="na.omit")
+tester
+predict(tester, test)
+tester$importance
+table(test$ismany, predict(tester, test))
+tester
+tester <- randomForest(factor(ismany) ~ weather+temperature+speed+wind_x+wind_y+hare+ame+kumori, data=train, na.action="na.omit")
+tester
+train <- data[data$year >= 2020, ]
+test <- data[data$year < 2020, ]
+tester <- randomForest(factor(ismany) ~ weather+temperature+speed+wind_x+wind_y+hare+ame+kumori, data=train, na.action="na.omit")
+tester
+train <- data[data$year < 2020, ]
+test <- data[data$year >= 2020, ]
+tester <- randomForest(factor(ismany) ~ weather+temperature+speed+wind_x+wind_y+hare+ame+kumori, data=train, na.action="na.omit")
+tester
+table(test$ismany, predict(tester, test))
+tester <- randomForest(log10(number+1) ~ weather+temperature+speed+wind_x+wind_y+hare+ame+kumori, data=train, na.action="na.omit")
+tester
+tester <- randomForest(log10(number+1) ~ weather+temperature+speed+wind_x+wind_y+hare+ame+kumori+year_date, data=train, na.action="na.omit")
+tester
+tester$importance
+head(data$year_date)
+head(yday(data$year_date))
+head(lubridate::yday(data$year_date))
+data$nday <- lubridate::yday(data$year_date)
+test <- data[data$year >= 2020, ]
+train <- data[data$year < 2020, ]
+tester <- randomForest(log10(number+1) ~ weather+temperature+speed+wind_x+wind_y+hare+ame+kumori+nday, data=train, na.action="na.omit")
+tester
+tester$importance
+tester2 <- randomForest(factor(ismany) ~ weather+temperature+speed+wind_x+wind_y+hare+ame+kumori+nday, data=train, na.action="na.omit")
+tester2
+predict(tester2, test)
+table(test$ismany, predict(tester2, test))
+predict(tester, test)
+d <- log(test$number+1) - predict(tester, test)
+dd <- d^2
+sum(dd) / (log(test$number+1))^2
+sum(dd)
+sum(dd) / var(log(test$number+1))
+plot(log(test$number+1), predict(tester, test))
+cor(log(test$number+1), predict(tester, test))
+plot(log(test$number+1), predict(tester, test))
+data$ismany[data$number > 50] <- 1
+test <- data[data$year >= 2020, ]
+train <- data[data$year < 2020, ]
+tester2 <- randomForest(factor(ismany) ~ weather+temperature+speed+wind_x+wind_y+hare+ame+kumori+nday, data=train, na.action="na.omit")
+tester2
+tester
+tester$importance
+tester <- randomForest(log10(number+1) ~ weather+temperature+speed+wind_x+wind_y+hare+ame+kumori+nday, data=train, na.action="na.omit")
+tester
+tester <- randomForest(log10(number+1) ~ (weather+temperature+speed+wind_x+wind_y+hare+ame+kumori+nday, data=train)^2, na.action="na.omit")
+tester <- randomForest(log10(number+1) ~ (weather+temperature+speed+wind_x+wind_y+hare+ame+kumori+nday)^2, data=train, na.action="na.omit")
+tester
+tester$importance
+tester <- randomForest(log10(number+1) ~ (weather+temperature+speed+wind_x+wind_y+hare+ame+kumori+nday)*(weather+temperature+speed+wind_x+wind_y+hare+ame+kumori+nday), data=train, na.action="na.omit")
+tester
+tester$importance
+tester <- randomForest(log10(number+1) ~ (weather+temperature+speed+wind_x+wind_y+hare+ame+kumori+nday)^3, data=train, na.action="na.omit")
+tester
+tester <- randomForest(log10(number+1) ~ (weather+temperature+speed+wind_x+wind_y+hare+ame+kumori+nday), data=train, na.action="na.omit")
+tester <- randomForest(log10(number+1) ~ (weather+temperature+speed+wind_x+wind_y+hare*ame*kumori+nday), data=train, na.action="na.omit")
+tester
+tester <- randomForest(log10(number+1) ~ weather+temperature+speed+wind_x*wind_y*hare*ame*kumori+nday, data=train, na.action="na.omit")
+tester
+tester <- randomForest(log10(number+1) ~ weather*temperature+speed+wind_x+wind_y+hare*ame*kumori+nday, data=train, na.action="na.omit")
+tester
+tester <- randomForest(log10(number+1) ~ weather+temperature+speed+wind_x+wind_y+hare*ame*kumori+nday, data=train, na.action="na.omit")
+tester
+tester <- randomForest(log10(number+1) ~ weather+temperature+speed+wind_x*wind_y*hare*ame*kumori+nday, data=train, na.action="na.omit")
+tester
+tester$importence
+tester$importance
+tester2 <- randomForest(factor(ismany) ~ weather+temperature+speed+wind_x*wind_y*hare*ame*kumori+nday, data=train, na.action="na.omit")
+table(test$ismany, predict(tester2, test))
+plot(log(test$number+1), predict(tester, test))
+ploter <- data.frame("true"=log(test$number+1), "pred"=predict(tester, test))
+library(ggplot2)
+ggplot(ploter, aes(x=true, y=pred)) + geom_point() + stat_smooth()
+ggplot(ploter, aes(x=true, y=pred)) + geom_point() + stat_smooth("method"=lm)
+ggplot(ploter, aes(x=true, y=pred)) + geom_point(alpha=0.3) + stat_smooth("method"=lm)
+ploter <- data.frame("true"=log10(test$number+1), "pred"=predict(tester, test))
+ggplot(ploter, aes(x=true, y=pred)) + geom_point(alpha=0.3) + stat_smooth("method"=lm)
+(log(test$number+1), predict(tester, test))cor
+lm(pred ~ true, data=ploter)
+summary(lm(pred ~ true, data=ploter))
+library(ggplot2)
+library(raster)
+data <- read.csv(~/Desktop/kubota_lab/PDF用データ.csv)
+data <- read.csv(""~/Desktop/kubota_lab/PDF用データ.csv")
+data <- read.csv("~/Desktop/kubota_lab/PDF用データ.csv")
+data <- read.csv("~/Desktop/kubota_lab/PDF用データ.csv", fileEncoding="shift-jis")
+head(data)
+pripa <- data[, c("x", "y", "保全優先度全国ランク_全分類群")]
+head(pripa)
+rr <- rasterize(coordinate(~), "val", update = TRUE)
+coordinates(pripa) ~ x + y
+coordinates(pripa) <- ~ x + y
+rr <- rasterize(pripa, pripa$保全優先度全国ランク_全分類群, "val", update = TRUE)
+r <- dfr <- rasterFromXYZ(pripa)
+head(pripa)
+pripa <- data[, c("x", "y", "保全優先度全国ランク_全分類群")]
+dfr <- rasterFromXYZ(pripa)
+head(pripa)
+dfr <- rasterFromXYZ(pripa)
+class(pripa)
+pripa <- data.table(pripa)
+dfr <- rasterFromXYZ(pripa)
+table(pripa$y)
+dfr <- rasterFromXYZ(pripa)
+colnames(pripa) <- c("lon", "lat", "z")
+dfr <- rasterFromXYZ(pripa)
+pria
+pripa
+head(pripa)
+dfr <- rasterFromXYZ(pripa)
+plot(lat ~ lon, data=pripa)
+r <- rasterFromXYZ(pripa)
+r
+r <- raster::rasterFromXYZ(pripa)
+rasterFromXYZ(pripa)
+ggplot(pripa, aes(x=lon, y=lat, color=z)) + geom_tile()
+p <- ggplot(pripa, aes(x=lon, y=lat, color=z)) + geom_tile()+#
+ theme(#
+    panel.background = element_rect(fill = "transparent",color = NA),#
+    panel.grid.minor = element_line(color = NA), #
+    panel.grid.major = element_line(color = NA),#
+    plot.background = element_rect(fill = "transparent",color = NA)  #ここを追加#
+)+#
+ggsave("~/Desktop/kubota_lab//testplot.png", p, bg = "transparent")
+p
+p <- ggplot(pripa, aes(x=lon, y=lat, color=z)) + geom_tile()+#
+ theme(#
+    panel.background = element_rect(fill = "transparent",color = NA),#
+    panel.grid.minor = element_line(color = NA), #
+    panel.grid.major = element_line(color = NA),#
+    plot.background = element_rect(fill = "transparent",color = NA)  #ここを追加#
+)
+ggsave("~/Desktop/kubota_lab//testplot.png", p, bg = "transparent")
+p <- ggplot(pripa, aes(x=lon, y=lat, color=z)) + geom_tile()+#
+ theme(#
+    panel.background = element_rect(fill = "transparent",color = NA),#
+    panel.grid.minor = element_line(color = NA), #
+    panel.grid.major = element_line(color = NA),#
+    plot.background = element_rect(fill = "transparent",color = NA),#
+    legend.position='none'#
+)#
+ggsave("~/Desktop/kubota_lab//testplot.png", p, bg = "transparent")
+p <- ggplot(pripa, aes(x=lon, y=lat, color=z)) + geom_tile()+#
+ theme(#
+    panel.background = element_rect(fill = "transparent",color = NA),#
+    panel.grid.minor = element_line(color = NA), #
+    panel.grid.major = element_line(color = NA),#
+    plot.background = element_rect(fill = "transparent",color = NA),#
+    legend.position='none',#
+    axis.text.x=element_blank(), #remove x axis labels#
+        axis.ticks.x=element_blank(), #remove x axis ticks#
+        axis.text.y=element_blank(),  #remove y axis labels#
+        axis.ticks.y=element_blank() #
+)#
+ggsave("~/Desktop/kubota_lab//testplot.png", p, bg = "transparent")
+p <- ggplot(pripa, aes(x=lon, y=lat, color=z)) + geom_tile()+#
+ theme(#
+    panel.background = element_rect(fill = "transparent",color = NA),#
+    panel.grid.minor = element_line(color = NA), #
+    panel.grid.major = element_line(color = NA),#
+    plot.background = element_rect(fill = "transparent",color = NA),#
+    legend.position='none',#
+    axis.text.x=element_blank(), #remove x axis labels#
+        axis.ticks.x=element_blank(), #remove x axis ticks#
+        axis.text.y=element_blank(),  #remove y axis labels#
+        axis.ticks.y=element_blank() #
+)+xlab("")+ylab("")#
+ggsave("~/Desktop/kubota_lab//testplot.png", p, bg = "transparent")
+p <- ggplot(pripa, aes(x=lon, y=lat, color=z, fill=z)) + geom_tile()+#
+ theme(#
+    panel.background = element_rect(fill = "transparent",color = NA),#
+    panel.grid.minor = element_line(color = NA), #
+    panel.grid.major = element_line(color = NA),#
+    plot.background = element_rect(fill = "transparent",color = NA),#
+    legend.position='none',#
+    axis.text.x=element_blank(), #remove x axis labels#
+        axis.ticks.x=element_blank(), #remove x axis ticks#
+        axis.text.y=element_blank(),  #remove y axis labels#
+        axis.ticks.y=element_blank() #
+)+xlab("")+ylab("")+#
++ scale_fill_brewer(palette = "Spectral")#
+ggsave("~/Desktop/kubota_lab//testplot.png", p, bg = "transparent")
+p <- ggplot(pripa, aes(x=lon, y=lat, color=z, fill=z)) + geom_tile()+#
+ theme(#
+    panel.background = element_rect(fill = "transparent",color = NA),#
+    panel.grid.minor = element_line(color = NA), #
+    panel.grid.major = element_line(color = NA),#
+    plot.background = element_rect(fill = "transparent",color = NA),#
+    legend.position='none',#
+    axis.text.x=element_blank(), #remove x axis labels#
+        axis.ticks.x=element_blank(), #remove x axis ticks#
+        axis.text.y=element_blank(),  #remove y axis labels#
+        axis.ticks.y=element_blank() #
+)+xlab("")+ylab("")+#
+scale_fill_brewer(palette = "Spectral")#
+ggsave("~/Desktop/kubota_lab//testplot.png", p, bg = "transparent")
+p <- ggplot(pripa, aes(x=lon, y=lat, color=z, fill=z)) + geom_tile()+#
+ theme(#
+    panel.background = element_rect(fill = "transparent",color = NA),#
+    panel.grid.minor = element_line(color = NA), #
+    panel.grid.major = element_line(color = NA),#
+    plot.background = element_rect(fill = "transparent",color = NA),#
+    legend.position='none',#
+    axis.text.x=element_blank(), #remove x axis labels#
+        axis.ticks.x=element_blank(), #remove x axis ticks#
+        axis.text.y=element_blank(),  #remove y axis labels#
+        axis.ticks.y=element_blank() #
+)+xlab("")+ylab("")+#
+scale_fill_continuous(palette = "Spectral")#
+ggsave("~/Desktop/kubota_lab//testplot.png", p, bg = "transparent")
+p <- ggplot(pripa, aes(x=lon, y=lat, color=z, fill=z)) + geom_tile()+#
+ theme(#
+    panel.background = element_rect(fill = "transparent",color = NA),#
+    panel.grid.minor = element_line(color = NA), #
+    panel.grid.major = element_line(color = NA),#
+    plot.background = element_rect(fill = "transparent",color = NA),#
+    legend.position='none',#
+    axis.text.x=element_blank(), #remove x axis labels#
+        axis.ticks.x=element_blank(), #remove x axis ticks#
+        axis.text.y=element_blank(),  #remove y axis labels#
+        axis.ticks.y=element_blank() #
+)+xlab("")+ylab("")+#
+scale_fill_continuous(palette = "Spectral")+scale_color_continuous(palette = "Spectral")
+p
+p <- ggplot(pripa, aes(x=lon, y=lat, color=z, fill=z)) + geom_tile()+#
+ theme(#
+    panel.background = element_rect(fill = "transparent",color = NA),#
+    panel.grid.minor = element_line(color = NA), #
+    panel.grid.major = element_line(color = NA),#
+    plot.background = element_rect(fill = "transparent",color = NA),#
+    legend.position='none',#
+    axis.text.x=element_blank(), #remove x axis labels#
+        axis.ticks.x=element_blank(), #remove x axis ticks#
+        axis.text.y=element_blank(),  #remove y axis labels#
+        axis.ticks.y=element_blank() #
+)+xlab("")+ylab("")+#
+scale_fill_gradientn("value", colours = rev(brewer.pal(9, "Spectral")), na.value = "white")+#
+scale_color_gradientn("value", colours = rev(brewer.pal(9, "Spectral")), na.value = "white")#
+ggsave("~/Desktop/kubota_lab//testplot.png", p, bg = "transparent")
+library(RColorBrewer)
+p <- ggplot(pripa, aes(x=lon, y=lat, color=z, fill=z)) + geom_tile()+#
+ theme(#
+    panel.background = element_rect(fill = "transparent",color = NA),#
+    panel.grid.minor = element_line(color = NA), #
+    panel.grid.major = element_line(color = NA),#
+    plot.background = element_rect(fill = "transparent",color = NA),#
+    legend.position='none',#
+    axis.text.x=element_blank(), #remove x axis labels#
+        axis.ticks.x=element_blank(), #remove x axis ticks#
+        axis.text.y=element_blank(),  #remove y axis labels#
+        axis.ticks.y=element_blank() #
+)+xlab("")+ylab("")+#
+scale_fill_gradientn("value", colours = rev(brewer.pal(9, "Spectral")), na.value = "white")+#
+scale_color_gradientn("value", colours = rev(brewer.pal(9, "Spectral")), na.value = "white")#
+ggsave("~/Desktop/kubota_lab//testplot.png", p, bg = "transparent")
+data_resh<-read.delim("data.txt", sep='\t', header=T, stringsAsFactor=FALSE)#
+#
+quant <- data_resh[c("MR", "RHAB", "AN", "AC", "RATE_WITCH", "SBS", "AM", "IRI_EC", "IRI_PT_norev", "EXP", "cul","Age", "Gender", "EDU")]#
+colnames(quant) <- c("MR", "RHAB", "AN", "AC", "RATE_WITCH", "SBS", "AM", "IRI_EC", "IRI_PT", "EXP", "cul","Age", "Gender", "EDU")#
+#
+quant$cul[quant$cul=="US"] <- 0#
+quant$cul[quant$cul=="JP"] <- 1#
+quant$Gender[quant$Gender=="その他"] <- "2"#
+quant$Gender[quant$Gender=="Other"] <- "2"#
+quant$Gender <- as.factor(quant$Gender)#
+quant$Age <- as.numeric(quant$Age)#
+edu_tiers <- rownames(table(quant$EDU))#
+quant$EDU[quant$EDU==edu_tiers[1]] <- 1#
+quant$EDU[quant$EDU==edu_tiers[2]] <- 6#
+quant$EDU[quant$EDU==edu_tiers[3]] <- 2#
+quant$EDU[quant$EDU==edu_tiers[4]] <- 0#
+quant$EDU[quant$EDU==edu_tiers[5]] <- 5#
+quant$EDU[quant$EDU==edu_tiers[6]] <- 3.5#
+quant$EDU[quant$EDU==edu_tiers[7]] <- 0#
+quant$EDU[quant$EDU==edu_tiers[8]] <- 3#
+quant$EDU[quant$EDU==edu_tiers[9]] <- 1#
+quant$EDU[quant$EDU==edu_tiers[10]] <- 4#
+quant$EDU[quant$EDU==edu_tiers[11]] <- 5#
+quant$EDU[quant$EDU==edu_tiers[12]] <- 6#
+quant$EDU[quant$EDU==edu_tiers[13]] <- 2#
+quant$EDU <- as.numeric(quant$EDU)#
+colnames(quant)[5] <- "TYP"#
+quant$Gender1[quant$Gender == 0] <- 0#
+quant$Gender2[quant$Gender == 0] <- 0#
+quant$Gender1[quant$Gender == 1] <- 1#
+quant$Gender2[quant$Gender == 1] <- 0#
+quant$Gender1[quant$Gender == 2] <- 0#
+quant$Gender2[quant$Gender == 2] <- 1#
+normali <- function(quant){#
+    quant$MR <- (quant$MR - mean(quant$MR))/sd(quant$MR)#
+    quant$AN <- (quant$AN- mean(quant$AN))/sd(quant$AN)#
+    quant$AC <- (quant$AC- mean(quant$AC))/sd(quant$AC)#
+    quant$SBS <- (quant$SBS- mean(quant$SBS))/sd(quant$SBS)#
+    quant$AM <- (quant$AM- mean(quant$AM))/sd(quant$AM)#
+    quant$IRI_EC <- (quant$IRI_EC- mean(quant$IRI_EC))/sd(quant$IRI_EC)#
+    quant$IRI_PT <- (quant$IRI_PT- mean(quant$IRI_PT))/sd(quant$IRI_PT)#
+    quant$EXP <- (quant$EXP- mean(quant$EXP))/sd(quant$EXP)#
+    quant$RHAB <- (quant$RHAB- mean(quant$RHAB))/sd(quant$RHAB)#
+    quant$Age <- (quant$Age- mean(quant$Age,na.rm=T))/sd(quant$Age,na.rm=T)#
+#
+    temp.edu <- quant$EDU#
+    table(temp.edu)#
+    temp.edu[temp.edu >= 5] <- 1000#
+    temp.edu[temp.edu < 5] <- -1000#
+    temp.edu[temp.edu ==1000] <- 1#
+    temp.edu[temp.edu ==-1000] <- 0#
+    table(temp.edu)#
+    quant$EDU <- temp.edu#
+    return(quant)#
+}#
+#
+temp_norm <- normali(quant[quant$cul=="0", ])#
+temp_norm$AN_AM <- temp_norm$AN + temp_norm$AM#
+temp_norm$AN_AM <- (temp_norm$AN_AM - mean(temp_norm$AN_AM)) / sd(temp_norm$AN_AM)#
+data_us <- temp_norm#
+#
+temp_norm <- normali(quant[quant$cul=="1", ])#
+temp_norm$AN_AM <- temp_norm$AN + temp_norm$AM#
+temp_norm$AN_AM <- (temp_norm$AN_AM - mean(temp_norm$AN_AM)) / sd(temp_norm$AN_AM)#
+data_jp <- temp_norm#
+#
+temp_norm <- normali(quant)#
+temp_norm$AN_AM <- temp_norm$AN + temp_norm$AM#
+temp_norm$AN_AM <- (temp_norm$AN_AM - mean(temp_norm$AN_AM)) / sd(temp_norm$AN_AM)#
+#
+data_sum <- temp_norm#
+us_subdata <- data_sum[data_sum$cul=="0",]#
+jp_subdata <- data_sum[data_sum$cul=="1",]#
+#
+Diff_resh <- function(jp, us){#
+#
+    jp_m <- mean(jp)#
+    us_m <- mean(us)#
+    jp_sd <- sd(jp)#
+    us_sd <- sd(us)#
+    dd <- cohen.d(us, jp)#
+    ddcu <- dd$conf.int[[1]]#
+    ddcl <- dd$conf.int[[2]]#
+    ddd <- dd$estimate#
+        AB <- data.frame("US_Mean"=us_m, "US_SD"=us_sd, "JP_Mean"=jp_m, "JP_SD"=jp_sd, "Cohen's_d"=ddd, "d_upper_95CI"=ddcu, "d_lower_95CI"=ddcl)#
+    return(AB)#
+}#
+#
+coef_resh <- function(x, method){#
+    coef_s <- as.data.frame(summary(x)$coefficients)#
+    coef_s$variable <- rownames(coef_s)#
+    coef_s$variable[coef_s$variable=="RHAB"] <- "Religious attendance"#
+    coef_s$variable[coef_s$variable=="SBS"] <- "Religious beliefs"#
+    coef_s$variable[coef_s$variable=="AC"] <- "Anthropocentrism"#
+    coef_s$variable[coef_s$variable=="AN"] <- "Animism"#
+    coef_s$variable[coef_s$variable=="AM"] <- "Anthropomorphism"#
+    coef_s$variable[coef_s$variable=="AN_AM"] <- "merged Animism"#
+    coef_s$variable[coef_s$variable=="cul1"] <- "culture"#
+    coef_s$variable[coef_s$variable=="cul1:RHAB"] <- "culture*Religious attendance"#
+    coef_s$variable[coef_s$variable=="cul1:SBS"] <- "culture*Religious beliefs"#
+    coef_s$variable[coef_s$variable=="cul1:AC"] <- "culture*Anthropocentrism"#
+    coef_s$variable[coef_s$variable=="cul1:AN"] <- "culture*Animism"#
+    coef_s$variable[coef_s$variable=="cul1:AM"] <- "culture*Anthropomorphism"#
+    coef_s$variable[coef_s$variable=="cul1:AN_AM"] <- "culture*merged Animism"#
+    coef_s$variable <- factor(coef_s$variable, #
+                              levels=rev(c("(Intercept)","culture", "Religious attendance","Religious beliefs","Anthropocentrism", "merged Animism","Animism","Anthropomorphism", #
+                                           "culture*Religious attendance","culture*Religious beliefs", "culture*Anthropocentrism", "culture*merged Animism", "culture*Animism", "culture*Anthropomorphism", #
+                                           "IRI_EC", "IRI_PT", "EXP","TYP", "EDU", "Age", "Gender1", "Gender2")))#
+    coef_s$model <- method#
+    colnames(coef_s)[2] <- "Std"#
+    return(coef_s)#
+}
+setwd('~/Desktop/research/2020_to_2021_robot_online_survey/adultStudy/dataAnalysis/moral_robot/)
+')
+setwd('~/Desktop/research/2020_to_2021_robot_online_survey/adultStudy/dataAnalysis/moral_robot/')
+data_resh<-read.delim("data.txt", sep='\t', header=T, stringsAsFactor=FALSE)#
+#
+quant <- data_resh[c("MR", "RHAB", "AN", "AC", "RATE_WITCH", "SBS", "AM", "IRI_EC", "IRI_PT_norev", "EXP", "cul","Age", "Gender", "EDU")]#
+colnames(quant) <- c("MR", "RHAB", "AN", "AC", "RATE_WITCH", "SBS", "AM", "IRI_EC", "IRI_PT", "EXP", "cul","Age", "Gender", "EDU")#
+#
+quant$cul[quant$cul=="US"] <- 0#
+quant$cul[quant$cul=="JP"] <- 1#
+quant$Gender[quant$Gender=="その他"] <- "2"#
+quant$Gender[quant$Gender=="Other"] <- "2"#
+quant$Gender <- as.factor(quant$Gender)#
+quant$Age <- as.numeric(quant$Age)#
+edu_tiers <- rownames(table(quant$EDU))#
+quant$EDU[quant$EDU==edu_tiers[1]] <- 1#
+quant$EDU[quant$EDU==edu_tiers[2]] <- 6#
+quant$EDU[quant$EDU==edu_tiers[3]] <- 2#
+quant$EDU[quant$EDU==edu_tiers[4]] <- 0#
+quant$EDU[quant$EDU==edu_tiers[5]] <- 5#
+quant$EDU[quant$EDU==edu_tiers[6]] <- 3.5#
+quant$EDU[quant$EDU==edu_tiers[7]] <- 0#
+quant$EDU[quant$EDU==edu_tiers[8]] <- 3#
+quant$EDU[quant$EDU==edu_tiers[9]] <- 1#
+quant$EDU[quant$EDU==edu_tiers[10]] <- 4#
+quant$EDU[quant$EDU==edu_tiers[11]] <- 5#
+quant$EDU[quant$EDU==edu_tiers[12]] <- 6#
+quant$EDU[quant$EDU==edu_tiers[13]] <- 2#
+quant$EDU <- as.numeric(quant$EDU)#
+colnames(quant)[5] <- "TYP"#
+quant$Gender1[quant$Gender == 0] <- 0#
+quant$Gender2[quant$Gender == 0] <- 0#
+quant$Gender1[quant$Gender == 1] <- 1#
+quant$Gender2[quant$Gender == 1] <- 0#
+quant$Gender1[quant$Gender == 2] <- 0#
+quant$Gender2[quant$Gender == 2] <- 1#
+normali <- function(quant){#
+    quant$MR <- (quant$MR - mean(quant$MR))/sd(quant$MR)#
+    quant$AN <- (quant$AN- mean(quant$AN))/sd(quant$AN)#
+    quant$AC <- (quant$AC- mean(quant$AC))/sd(quant$AC)#
+    quant$SBS <- (quant$SBS- mean(quant$SBS))/sd(quant$SBS)#
+    quant$AM <- (quant$AM- mean(quant$AM))/sd(quant$AM)#
+    quant$IRI_EC <- (quant$IRI_EC- mean(quant$IRI_EC))/sd(quant$IRI_EC)#
+    quant$IRI_PT <- (quant$IRI_PT- mean(quant$IRI_PT))/sd(quant$IRI_PT)#
+    quant$EXP <- (quant$EXP- mean(quant$EXP))/sd(quant$EXP)#
+    quant$RHAB <- (quant$RHAB- mean(quant$RHAB))/sd(quant$RHAB)#
+    quant$Age <- (quant$Age- mean(quant$Age,na.rm=T))/sd(quant$Age,na.rm=T)#
+#
+    temp.edu <- quant$EDU#
+    table(temp.edu)#
+    temp.edu[temp.edu >= 5] <- 1000#
+    temp.edu[temp.edu < 5] <- -1000#
+    temp.edu[temp.edu ==1000] <- 1#
+    temp.edu[temp.edu ==-1000] <- 0#
+    table(temp.edu)#
+    quant$EDU <- temp.edu#
+    return(quant)#
+}#
+#
+temp_norm <- normali(quant[quant$cul=="0", ])#
+temp_norm$AN_AM <- temp_norm$AN + temp_norm$AM#
+temp_norm$AN_AM <- (temp_norm$AN_AM - mean(temp_norm$AN_AM)) / sd(temp_norm$AN_AM)#
+data_us <- temp_norm#
+#
+temp_norm <- normali(quant[quant$cul=="1", ])#
+temp_norm$AN_AM <- temp_norm$AN + temp_norm$AM#
+temp_norm$AN_AM <- (temp_norm$AN_AM - mean(temp_norm$AN_AM)) / sd(temp_norm$AN_AM)#
+data_jp <- temp_norm#
+#
+temp_norm <- normali(quant)#
+temp_norm$AN_AM <- temp_norm$AN + temp_norm$AM#
+temp_norm$AN_AM <- (temp_norm$AN_AM - mean(temp_norm$AN_AM)) / sd(temp_norm$AN_AM)#
+#
+data_sum <- temp_norm#
+us_subdata <- data_sum[data_sum$cul=="0",]#
+jp_subdata <- data_sum[data_sum$cul=="1",]#
+#
+Diff_resh <- function(jp, us){#
+#
+    jp_m <- mean(jp)#
+    us_m <- mean(us)#
+    jp_sd <- sd(jp)#
+    us_sd <- sd(us)#
+    dd <- cohen.d(us, jp)#
+    ddcu <- dd$conf.int[[1]]#
+    ddcl <- dd$conf.int[[2]]#
+    ddd <- dd$estimate#
+        AB <- data.frame("US_Mean"=us_m, "US_SD"=us_sd, "JP_Mean"=jp_m, "JP_SD"=jp_sd, "Cohen's_d"=ddd, "d_upper_95CI"=ddcu, "d_lower_95CI"=ddcl)#
+    return(AB)#
+}#
+#
+coef_resh <- function(x, method){#
+    coef_s <- as.data.frame(summary(x)$coefficients)#
+    coef_s$variable <- rownames(coef_s)#
+    coef_s$variable[coef_s$variable=="RHAB"] <- "Religious attendance"#
+    coef_s$variable[coef_s$variable=="SBS"] <- "Religious beliefs"#
+    coef_s$variable[coef_s$variable=="AC"] <- "Anthropocentrism"#
+    coef_s$variable[coef_s$variable=="AN"] <- "Animism"#
+    coef_s$variable[coef_s$variable=="AM"] <- "Anthropomorphism"#
+    coef_s$variable[coef_s$variable=="AN_AM"] <- "merged Animism"#
+    coef_s$variable[coef_s$variable=="cul1"] <- "culture"#
+    coef_s$variable[coef_s$variable=="cul1:RHAB"] <- "culture*Religious attendance"#
+    coef_s$variable[coef_s$variable=="cul1:SBS"] <- "culture*Religious beliefs"#
+    coef_s$variable[coef_s$variable=="cul1:AC"] <- "culture*Anthropocentrism"#
+    coef_s$variable[coef_s$variable=="cul1:AN"] <- "culture*Animism"#
+    coef_s$variable[coef_s$variable=="cul1:AM"] <- "culture*Anthropomorphism"#
+    coef_s$variable[coef_s$variable=="cul1:AN_AM"] <- "culture*merged Animism"#
+    coef_s$variable <- factor(coef_s$variable, #
+                              levels=rev(c("(Intercept)","culture", "Religious attendance","Religious beliefs","Anthropocentrism", "merged Animism","Animism","Anthropomorphism", #
+                                           "culture*Religious attendance","culture*Religious beliefs", "culture*Anthropocentrism", "culture*merged Animism", "culture*Animism", "culture*Anthropomorphism", #
+                                           "IRI_EC", "IRI_PT", "EXP","TYP", "EDU", "Age", "Gender1", "Gender2")))#
+    coef_s$model <- method#
+    colnames(coef_s)[2] <- "Std"#
+    return(coef_s)#
+}
+### descriptive statistics ####
+rbind(Diff_resh(jp_subdata$MR, us_subdata$MR),#
+Diff_resh(jp_subdata$RHAB, us_subdata$RHAB),#
+Diff_resh(jp_subdata$SBS, us_subdata$SBS),#
+Diff_resh(jp_subdata$AC, us_subdata$AC),#
+Diff_resh(jp_subdata$AN_AM, us_subdata$AN_AM),#
+Diff_resh(jp_subdata$IRI_EC, us_subdata$IRI_EC),#
+Diff_resh(jp_subdata$IRI_PT, us_subdata$IRI_PT),#
+Diff_resh(jp_subdata$EXP, us_subdata$EXP))
+library(effsize)
+### descriptive statistics ####
+rbind(Diff_resh(jp_subdata$MR, us_subdata$MR),#
+Diff_resh(jp_subdata$RHAB, us_subdata$RHAB),#
+Diff_resh(jp_subdata$SBS, us_subdata$SBS),#
+Diff_resh(jp_subdata$AC, us_subdata$AC),#
+Diff_resh(jp_subdata$AN_AM, us_subdata$AN_AM),#
+Diff_resh(jp_subdata$IRI_EC, us_subdata$IRI_EC),#
+Diff_resh(jp_subdata$IRI_PT, us_subdata$IRI_PT),#
+Diff_resh(jp_subdata$EXP, us_subdata$EXP))
+library(MuMIn)#
+options(na.action = "na.fail")
+rel_us <- lm(MR ~ RHAB + SBS + IRI_PT + IRI_EC +TYP + EXP + Age+EDU + Gender1 + Gender2, data=data_us)#
+coef_resh(rel_us, "religion")#
+t(data.frame("R-squared"=summary(rel_us)["adj.r.squared"][[1]], "AIC"=AIC(rel_us)))#
+#
+val_us <- lm(MR ~ AC + AN_AM + IRI_PT + IRI_EC +TYP + EXP + Age+EDU + Gender1 + Gender2, data=data_us)#
+coef_resh(val_us, "value")#
+t(data.frame("R-squared"=summary(val_us)["adj.r.squared"][[1]], "AIC"=AIC(val_us)))#
+#
+both_us <- lm(MR ~ RHAB + SBS + AC + AN_AM + IRI_PT + IRI_EC +TYP + EXP + Age+EDU + Gender1 + Gender2, data=data_us)#
+coef_resh(both_us, "both")#
+t(data.frame("R-squared"=summary(both_us)["adj.r.squared"][[1]], "AIC"=AIC(both_us)))#
+#
+sep_us <- lm(MR ~ AC + AN+AM + IRI_PT + IRI_EC +TYP + EXP + Age+EDU + Gender1 + Gender2, data=data_us)#
+coef_resh(sep_us, "separate")#
+t(data.frame("R-squared"=summary(sep_us)["adj.r.squared"][[1]], "AIC"=AIC(sep_us)))
+US_full_model <- lm(MR ~ RHAB + SBS + AC + AN_AM + IRI_PT  + IRI_EC+TYP + EXP + Age + EDU + Gender1 + Gender2, data=data_us)#
+US_kekka.AIC <- dredge(US_full_model, rank="AIC")#
+US_kekka.AIC
+best_us <- lm(MR ~ AC + AN_AM + IRI_PT  + IRI_EC + EXP+ Gender1 , data=data_us)#
+coef_resh(best_us, "best")#
+t(data.frame("R-squared"=summary(best_us)["adj.r.squared"][[1]], "AIC"=AIC(best_us)))
+### correlation ####
+for_cor_us <- data_us#
+for_cor_us_ <- for_cor_us[, c("MR", "RHAB", "SBS","AC", "AN_AM", "IRI_EC", "IRI_PT", "TYP", "EXP", "Age", "Gender1", "Gender2", "EDU")]#
+colnames(for_cor_us_) <- c("Moral care for robots (MR)", #
+                           "Religious attendance (RA)", #
+                           "Religious beliefs (RB)",#
+                           "Anthropocentrism (AC)", #
+                           "Animism (AN)",#
+                           "Empathic concern (EC)",#
+                           "Perspective taking (PT)",#
+                           "Typical image of robots (TYP)",#
+                           "Exposure to robot related experience (EXP)",#
+                           "Age",#
+                           "Gender1",#
+                           "Gender2",#
+                           "Education")#
+cor_us__ <- as.data.frame(cor(for_cor_us_))#
+colnames(cor_us__) <-  c("MR", #
+                           "RA", #
+                           "RB",#
+                           "AC", #
+                           "AN",#
+                           "EC",#
+                           "PT",#
+                           "TYP",#
+                           "EXP",#
+                           "Age",#
+                           "Gender1",#
+                           "Gender2",#
+                           "Edu")#
+cor_us__#
+for_cor_jp <- data_jp#
+for_cor_jp_ <- for_cor_jp[, c("MR", "RHAB", "SBS","AC", "AN_AM", "IRI_EC", "IRI_PT", "TYP", "EXP", "Age", "Gender1", "Gender2", "EDU")]#
+colnames(for_cor_jp_) <- c("Moral care for robots (MR)", #
+                           "Religious attendance (RA)", #
+                           "Religious beliefs (RB)",#
+                           "Anthropocentrism (AC)", #
+                           "Animism (AN)",#
+                           "Empathic concern (EC)",#
+                           "Perspective taking (PT)",#
+                           "Typical image of robots (TYP)",#
+                           "Exposure to robot related experience (EXP)",#
+                           "Age",#
+                           "Gender1",#
+                           "Gender2",#
+                           "Education")#
+cor_jp__ <- as.data.frame(cor(for_cor_jp_))#
+colnames(cor_jp__) <-  c("MR", #
+                           "RA", #
+                           "RB",#
+                           "AC", #
+                           "AN",#
+                           "EC",#
+                           "PT",#
+                           "TYP",#
+                           "EXP",#
+                           "Age",#
+                           "Gender1",#
+                           "Gender2",#
+                           "Edu")#
+cor_jp__
+norm(1)
+norm(1,1)
+rnorm( 10,0,1)
+aa <- rnorm( 10,0,1)
+ad(aa)
+sd(aa)
+aa <- scale(aa)
+aa
+sd(aa)
+bb <- rnorm(10,0,1)
+b <- scale(bb)
+bb <- scale(bb)
+aa + bb
+sd(aa + bb)
+mean(aa + bb)
+mean(aa)
+mean(bb)
+aa+bb
+library(ggplot2)
+library(ggplot2)#
+#
+data_jp<-read.delim("jp_data.tsv", sep='\t', header=T, stringsAsFactor=FALSE)#
+data_jp$id <- paste("JP", rownames(data_jp), sep="")#
+data_en<-read.delim("us_data.tsv", sep='\t', header=T, stringsAsFactor=FALSE)#
+data_en$id <- paste("EN", rownames(data_en), sep="")#
+data_en$FNL1 <- c(NA)#
+data_en$FNL2 <- c(NA)#
+data_jp$Gender[data_jp$Gender=="女性"] = 1#
+data_jp$Gender[data_jp$Gender=="男性"] = 0#
+data_en$Gender[data_en$Gender=="Female"] = 1#
+data_en$Gender[data_en$Gender=="Male"] = 0#
+table(data_jp$Gender) #
+table(data_en$Gender)#
+table(data_jp$Gender)  / nrow(data_jp)#
+table(data_en$Gender) / nrow(data_en)#
+data_jp$Age <- as.numeric(data_jp$Age)#
+data_en$Age <- as.numeric(data_en$Age)
+### data summary ####
+hist(data_jp$Age)#
+hist(data_en$Age)#
+#
+sum(is.na(data_jp$Age))#
+mean(data_jp$Age)#
+sd(data_jp$Age)#
+min(data_jp$Age)#
+max(data_jp$Age)#
+#
+sum(is.na(data_en$Age))#
+mean(data_en$Age)#
+sd(data_en$Age)#
+min(data_en$Age)#
+max(data_en$Age)#
+### data check and reshape ####
+#
+#### US #####
+AN_en <- data_en[str_detect(colnames(data_en), pattern="AN_")]#
+AN_en$id <- data_en$id#
+AC_en <- data_en[str_detect(colnames(data_en), pattern="AC_")]#
+AC_en$id <- data_en$id#
+AC_en$AC_6. <- 8 - AC_en$AC_6.#
+AC_en$AC_9. <- 8 - AC_en$AC_9.#
+RATE_en <- data_en[str_detect(colnames(data_en), pattern="RATE_WITCH")]#
+RATE_en$id <- data_en$id#
+MR_en <- 8 - data_en[str_detect(colnames(data_en), pattern="MR_")]#
+MR_en$id <- data_en$id#
+SBS_en <- data_en[str_detect(colnames(data_en), pattern="SBS_")]#
+SBS_en$id <- data_en$id#
+AM_en <- data_en[str_detect(colnames(data_en), pattern="AM_")]#
+AM_en$id <- data_en$id#
+IRI_en <- data_en[str_detect(colnames(data_en), pattern="IRI_")]#
+IRI_en$id <- data_en$id#
+IRI_en$IRI_3.PT. <- 8 - IRI_en$IRI_3.PT.#
+IRI_en$IRI_4.EC. <- 8 - IRI_en$IRI_4.EC.#
+IRI_en$IRI_14.EC. <- 8 - IRI_en$IRI_14.EC.#
+IRI_en$IRI_15.PT. <- 8 - IRI_en$IRI_15.PT.#
+IRI_en$IRI_18.EC. <- 8 - IRI_en$IRI_18.EC.#
+IRI_en <- IRI_en[c(1,3,5,7,9,10,12, 2,4,6,8,11,13,14, 15)]#
+EXP_en <- data_en[str_detect(colnames(data_en), pattern="EXP")]#
+EXP_en$id <- data_en$id#
+RHAB_en <- data_en[c("RHAB", "FNL1", "FNL2", "id")]#
+DEMO_en <- data_en[c("id", "Gender", "Age", "Region", "REL")]#
+DEMO2_en <- cbind(data_en[str_detect(colnames(data_en), pattern="NAT")], data_en[str_detect(colnames(data_en), pattern="LNG")])#
+DEMO2_en <- cbind(DEMO2_en, data_en["EDU"])#
+DEMO2_en$id <- data_en$id#
+#
+#### JP #####
+AN_jp <- data_jp[str_detect(colnames(data_jp), pattern="AN_")]#
+AN_jp$id <- data_jp$id#
+AC_jp <- data_jp[str_detect(colnames(data_jp), pattern="AC_")]#
+AC_jp$id <- data_jp$id#
+AC_jp$AC_6. <- 8 - AC_jp$AC_6.#
+AC_jp$AC_9. <- 8 - AC_jp$AC_9.#
+RATE_jp <- data_jp[str_detect(colnames(data_jp), pattern="RATE_WITCH")]#
+RATE_jp$id <- data_jp$id#
+MR_jp <- 8 - data_jp[str_detect(colnames(data_jp), pattern="MR_")]#
+MR_jp$id <- data_jp$id#
+SBS_jp <- data_jp[str_detect(colnames(data_jp), pattern="SBS_")]#
+SBS_jp$id <- data_jp$id#
+AM_jp <- data_jp[str_detect(colnames(data_jp), pattern="AM_")]#
+AM_jp$id <- data_jp$id#
+IRI_jp <- data_jp[str_detect(colnames(data_jp), pattern="IRI_")]#
+IRI_jp$id <- data_jp$id#
+IRI_jp$IRI_3.PT. <- 8 - IRI_jp$IRI_3.PT.#
+IRI_jp$IRI_4.EC. <- 8 - IRI_jp$IRI_4.EC.#
+IRI_jp$IRI_14.EC. <- 8 - IRI_jp$IRI_14.EC.#
+IRI_jp$IRI_15.PT. <- 8 - IRI_jp$IRI_15.PT.#
+IRI_jp$IRI_18.EC. <- 8 - IRI_jp$IRI_18.EC.#
+IRI_jp <- IRI_jp[c(1,3,5,7,9,10,12, 2,4,6,8,11,13,14, 15)]#
+EXP_jp <- data_jp[str_detect(colnames(data_jp), pattern="EXP")]#
+EXP_jp$id <- data_jp$id#
+RHAB_jp <- data_jp[c("RHAB", "FNL1", "FNL2", "id")]#
+DEMO_jp <- data_jp[c("id", "Gender", "Age", "Region", "REL")]#
+DEMO2_jp <- cbind(data_jp[str_detect(colnames(data_jp), pattern="NAT")], data_jp[str_detect(colnames(data_jp), pattern="LNG")])#
+DEMO2_jp <- cbind(DEMO2_jp, data_jp["EDU"])#
+DEMO2_jp$id <- data_jp$id#
+DEMO2_jp
+Cor_check <- function(data){#
+    M <- data.frame(AV=apply(data,1,mean))#
+    data_M <- cbind(data, M)#
+    data_alpha <- psych::alpha(data)#
+    print(data_alpha)#
+    corrplot::corrplot(cor(data_M))#
+#
+}#
+#
+Diff_check <- function(data_jp, data_en, min, max){#
+    AB_jp <- data_jp#
+        AB_en <- data_en#
+    print(summary(apply(AB_jp[-ncol(AB_jp)], 1,mean)))#
+    print(summary(apply(AB_en[-ncol(AB_en)], 1,mean)))#
+    print(sd(apply(AB_jp[-ncol(AB_jp)], 1,mean)))#
+    print(sd(apply(AB_en[-ncol(AB_en)], 1,mean)))#
+    print(t.test(apply(AB_jp[-ncol(AB_jp)], 1,mean), apply(AB_en[-ncol(AB_en)], 1,mean)))#
+    print(mean(apply(AB_en[-ncol(AB_jp)], 1,mean)) - mean(apply(AB_jp[-ncol(AB_jp)], 1,mean)))#
+    print(cohen.d(apply(AB_en[-ncol(AB_en)], 1,mean), apply(AB_jp[-ncol(AB_jp)], 1,mean)))#
+    temp <- data.frame(apply(AB_jp[-ncol(AB_jp)], 1,mean))#
+    colnames(temp) <- c("value")#
+    temp$cul <- "JP"#
+    temp$id <- AB_jp$id#
+    temp2 <- data.frame(apply(AB_en[-ncol(AB_en)], 1,mean))#
+    colnames(temp2) <- c("value")#
+    temp2$cul <- "US"#
+    temp2$id <- AB_en$id#
+    AB <- rbind(temp, temp2)#
+    g <- ggplot(AB, aes(x=cul, y=value)) + geom_boxplot()  +#
+    stat_summary(fun=mean, geom="point", shape=20, size=9, color="blue", fill="red")+ #
+    scale_y_continuous(breaks=c(min:max))+#
+    theme(axis.title.x=element_blank(), #
+          axis.title.y=element_blank(),#
+          axis.text=element_text(size=18)#
+         )#
+    print(g)#
+    return(AB)#
+}#
+#
+#### by variables #####
+#
+##### moral care for robots ######
+Cor_check(MR_jp[-ncol(MR_jp)])#
+Cor_check(MR_en[-ncol(MR_en)])#
+MR <- Diff_check(MR_jp, MR_en, 1, 7)#
+#
+##### animism ######
+Cor_check(AN_jp[-ncol(AN_jp)])#
+Cor_check(AN_en[-ncol(AN_en)])#
+AN <- Diff_check(AN_jp, AN_en, 1, 5)#
+#
+Cor_check(cbind(AN_jp[-ncol(AN_jp)], AM_jp[-ncol(AM_jp)]))#
+Cor_check(cbind(AN_en[-ncol(AN_en)], AM_en[-ncol(AM_en)]))#
+AN <- Diff_check(AN_jp, AN_en, 1, 5)#
+#
+##### anthropomorphism ######
+Cor_check(AM_jp[-ncol(AM_jp)])#
+Cor_check(AM_en[-ncol(AM_en)])#
+AM <- Diff_check(AM_jp, AM_en, 0, 10)#
+#
+##### anthropocentrism ######
+Cor_check(AC_jp[-ncol(AC_jp)])#
+Cor_check(AC_en[-ncol(AC_en)])#
+AC <- Diff_check(AC_jp, AC_en, 1, 7)#
+#
+##### SBS ######
+Cor_check(SBS_jp[-ncol(SBS_jp)])#
+Cor_check(SBS_en[-ncol(SBS_en)])#
+SBS <- Diff_check(SBS_jp, SBS_en, -4, 4)#
+#
+hist(apply(SBS_jp[-ncol(SBS_jp)], 1,mean), main="Religious beliefs (JP)", xlab="")#
+hist(apply(SBS_en[-ncol(SBS_jp)], 1,mean), main="Religious beliefs (US)", xlab="")#
+#
+##### IRI ######
+Cor_check(IRI_jp[c(1,2,3,4,5,6,7)])#
+Cor_check(IRI_en[c(1,2,3,4,5,6,7)])#
+#
+Cor_check(IRI_jp_ec_nonrev)#
+Cor_check(IRI_en_ec_nonrev)#
+IRI_EC_norev <- Diff_check(IRI_jp[, c(1,3,6,7)], IRI_en[, c(1,3,6,7)], 1, 7)#
+#
+Cor_check(IRI_jp[c(9,10,12,13,14)])#
+Cor_check(IRI_en[c(9,10,12,13,14)])#
+IRI_PT_norev <- Diff_check(IRI_jp[c(9,10,12,13,14)], IRI_en[c(9,10,12,13,14)], 1, 7)#
+#
+##### media effect ######
+Cor_check(EXP_jp[-ncol(EXP_jp)])#
+Cor_check(EXP_en[-ncol(EXP_en)])#
+EXP <- Diff_check(EXP_jp, EXP_en, 1,8)#
+#### robot image #####
+robo_rate <- rbind(#
+table(RATE_jp[1]),#
+table(RATE_en[1])#
+    )#
+robo_rate#
+table(RATE_jp[1]) / sum(table(RATE_jp[1]))#
+table(RATE_en[1]) / sum(table(RATE_en[1]))#
+chisq.test(robo_rate)
+### data check and extract ####
+#
+#### US #####
+AN_en <- data_en[str_detect(colnames(data_en), pattern="AN_")]#
+AN_en$id <- data_en$id#
+AC_en <- data_en[str_detect(colnames(data_en), pattern="AC_")]#
+AC_en$id <- data_en$id#
+AC_en$AC_6. <- 8 - AC_en$AC_6.#
+AC_en$AC_9. <- 8 - AC_en$AC_9.#
+RATE_en <- data_en[str_detect(colnames(data_en), pattern="RATE_WITCH")]#
+RATE_en$id <- data_en$id#
+MR_en <- 8 - data_en[str_detect(colnames(data_en), pattern="MR_")]#
+MR_en$id <- data_en$id#
+SBS_en <- data_en[str_detect(colnames(data_en), pattern="SBS_")]#
+SBS_en$id <- data_en$id#
+AM_en <- data_en[str_detect(colnames(data_en), pattern="AM_")]#
+AM_en$id <- data_en$id#
+IRI_en <- data_en[str_detect(colnames(data_en), pattern="IRI_")]#
+IRI_en$id <- data_en$id#
+IRI_en$IRI_3.PT. <- 8 - IRI_en$IRI_3.PT.#
+IRI_en$IRI_4.EC. <- 8 - IRI_en$IRI_4.EC.#
+IRI_en$IRI_14.EC. <- 8 - IRI_en$IRI_14.EC.#
+IRI_en$IRI_15.PT. <- 8 - IRI_en$IRI_15.PT.#
+IRI_en$IRI_18.EC. <- 8 - IRI_en$IRI_18.EC.#
+IRI_en <- IRI_en[c(1,3,5,7,9,10,12, 2,4,6,8,11,13,14, 15)]#
+EXP_en <- data_en[str_detect(colnames(data_en), pattern="EXP")]#
+EXP_en$id <- data_en$id#
+RHAB_en <- data_en[c("RHAB", "FNL1", "FNL2", "id")]#
+DEMO_en <- data_en[c("id", "Gender", "Age", "Region", "REL")]#
+DEMO2_en <- cbind(data_en[str_detect(colnames(data_en), pattern="NAT")], data_en[str_detect(colnames(data_en), pattern="LNG")])#
+DEMO2_en <- cbind(DEMO2_en, data_en["EDU"])#
+DEMO2_en$id <- data_en$id#
+#
+#### JP #####
+AN_jp <- data_jp[str_detect(colnames(data_jp), pattern="AN_")]#
+AN_jp$id <- data_jp$id#
+AC_jp <- data_jp[str_detect(colnames(data_jp), pattern="AC_")]#
+AC_jp$id <- data_jp$id#
+AC_jp$AC_6. <- 8 - AC_jp$AC_6.#
+AC_jp$AC_9. <- 8 - AC_jp$AC_9.#
+RATE_jp <- data_jp[str_detect(colnames(data_jp), pattern="RATE_WITCH")]#
+RATE_jp$id <- data_jp$id#
+MR_jp <- 8 - data_jp[str_detect(colnames(data_jp), pattern="MR_")]#
+MR_jp$id <- data_jp$id#
+SBS_jp <- data_jp[str_detect(colnames(data_jp), pattern="SBS_")]#
+SBS_jp$id <- data_jp$id#
+AM_jp <- data_jp[str_detect(colnames(data_jp), pattern="AM_")]#
+AM_jp$id <- data_jp$id#
+IRI_jp <- data_jp[str_detect(colnames(data_jp), pattern="IRI_")]#
+IRI_jp$id <- data_jp$id#
+IRI_jp$IRI_3.PT. <- 8 - IRI_jp$IRI_3.PT.#
+IRI_jp$IRI_4.EC. <- 8 - IRI_jp$IRI_4.EC.#
+IRI_jp$IRI_14.EC. <- 8 - IRI_jp$IRI_14.EC.#
+IRI_jp$IRI_15.PT. <- 8 - IRI_jp$IRI_15.PT.#
+IRI_jp$IRI_18.EC. <- 8 - IRI_jp$IRI_18.EC.#
+IRI_jp <- IRI_jp[c(1,3,5,7,9,10,12, 2,4,6,8,11,13,14, 15)]#
+EXP_jp <- data_jp[str_detect(colnames(data_jp), pattern="EXP")]#
+EXP_jp$id <- data_jp$id#
+RHAB_jp <- data_jp[c("RHAB", "FNL1", "FNL2", "id")]#
+DEMO_jp <- data_jp[c("id", "Gender", "Age", "Region", "REL")]#
+DEMO2_jp <- cbind(data_jp[str_detect(colnames(data_jp), pattern="NAT")], data_jp[str_detect(colnames(data_jp), pattern="LNG")])#
+DEMO2_jp <- cbind(DEMO2_jp, data_jp["EDU"])#
+DEMO2_jp$id <- data_jp$id#
+DEMO2_jp#
+#
+Cor_check <- function(data){#
+    M <- data.frame(AV=apply(data,1,mean))#
+    data_M <- cbind(data, M)#
+    data_alpha <- psych::alpha(data)#
+    print(data_alpha)#
+    corrplot::corrplot(cor(data_M))#
+#
+}
+library(stringr)
+#### US #####
+AN_en <- data_en[str_detect(colnames(data_en), pattern="AN_")]#
+AN_en$id <- data_en$id#
+AC_en <- data_en[str_detect(colnames(data_en), pattern="AC_")]#
+AC_en$id <- data_en$id#
+AC_en$AC_6. <- 8 - AC_en$AC_6.#
+AC_en$AC_9. <- 8 - AC_en$AC_9.#
+RATE_en <- data_en[str_detect(colnames(data_en), pattern="RATE_WITCH")]#
+RATE_en$id <- data_en$id#
+MR_en <- 8 - data_en[str_detect(colnames(data_en), pattern="MR_")]#
+MR_en$id <- data_en$id#
+SBS_en <- data_en[str_detect(colnames(data_en), pattern="SBS_")]#
+SBS_en$id <- data_en$id#
+AM_en <- data_en[str_detect(colnames(data_en), pattern="AM_")]#
+AM_en$id <- data_en$id#
+IRI_en <- data_en[str_detect(colnames(data_en), pattern="IRI_")]#
+IRI_en$id <- data_en$id#
+IRI_en$IRI_3.PT. <- 8 - IRI_en$IRI_3.PT.#
+IRI_en$IRI_4.EC. <- 8 - IRI_en$IRI_4.EC.#
+IRI_en$IRI_14.EC. <- 8 - IRI_en$IRI_14.EC.#
+IRI_en$IRI_15.PT. <- 8 - IRI_en$IRI_15.PT.#
+IRI_en$IRI_18.EC. <- 8 - IRI_en$IRI_18.EC.#
+IRI_en <- IRI_en[c(1,3,5,7,9,10,12, 2,4,6,8,11,13,14, 15)]#
+EXP_en <- data_en[str_detect(colnames(data_en), pattern="EXP")]#
+EXP_en$id <- data_en$id#
+RHAB_en <- data_en[c("RHAB", "FNL1", "FNL2", "id")]#
+DEMO_en <- data_en[c("id", "Gender", "Age", "Region", "REL")]#
+DEMO2_en <- cbind(data_en[str_detect(colnames(data_en), pattern="NAT")], data_en[str_detect(colnames(data_en), pattern="LNG")])#
+DEMO2_en <- cbind(DEMO2_en, data_en["EDU"])#
+DEMO2_en$id <- data_en$id
+#### JP #####
+AN_jp <- data_jp[str_detect(colnames(data_jp), pattern="AN_")]#
+AN_jp$id <- data_jp$id#
+AC_jp <- data_jp[str_detect(colnames(data_jp), pattern="AC_")]#
+AC_jp$id <- data_jp$id#
+AC_jp$AC_6. <- 8 - AC_jp$AC_6.#
+AC_jp$AC_9. <- 8 - AC_jp$AC_9.#
+RATE_jp <- data_jp[str_detect(colnames(data_jp), pattern="RATE_WITCH")]#
+RATE_jp$id <- data_jp$id#
+MR_jp <- 8 - data_jp[str_detect(colnames(data_jp), pattern="MR_")]#
+MR_jp$id <- data_jp$id#
+SBS_jp <- data_jp[str_detect(colnames(data_jp), pattern="SBS_")]#
+SBS_jp$id <- data_jp$id#
+AM_jp <- data_jp[str_detect(colnames(data_jp), pattern="AM_")]#
+AM_jp$id <- data_jp$id#
+IRI_jp <- data_jp[str_detect(colnames(data_jp), pattern="IRI_")]#
+IRI_jp$id <- data_jp$id#
+IRI_jp$IRI_3.PT. <- 8 - IRI_jp$IRI_3.PT.#
+IRI_jp$IRI_4.EC. <- 8 - IRI_jp$IRI_4.EC.#
+IRI_jp$IRI_14.EC. <- 8 - IRI_jp$IRI_14.EC.#
+IRI_jp$IRI_15.PT. <- 8 - IRI_jp$IRI_15.PT.#
+IRI_jp$IRI_18.EC. <- 8 - IRI_jp$IRI_18.EC.#
+IRI_jp <- IRI_jp[c(1,3,5,7,9,10,12, 2,4,6,8,11,13,14, 15)]#
+EXP_jp <- data_jp[str_detect(colnames(data_jp), pattern="EXP")]#
+EXP_jp$id <- data_jp$id#
+RHAB_jp <- data_jp[c("RHAB", "FNL1", "FNL2", "id")]#
+DEMO_jp <- data_jp[c("id", "Gender", "Age", "Region", "REL")]#
+DEMO2_jp <- cbind(data_jp[str_detect(colnames(data_jp), pattern="NAT")], data_jp[str_detect(colnames(data_jp), pattern="LNG")])#
+DEMO2_jp <- cbind(DEMO2_jp, data_jp["EDU"])#
+DEMO2_jp$id <- data_jp$id#
+DEMO2_jp
+Cor_check <- function(data){#
+    M <- data.frame(AV=apply(data,1,mean))#
+    data_M <- cbind(data, M)#
+    data_alpha <- psych::alpha(data)#
+    print(data_alpha)#
+    corrplot::corrplot(cor(data_M))#
+}#
+#
+Diff_check <- function(data_jp, data_en, min, max){#
+    AB_jp <- data_jp#
+        AB_en <- data_en#
+    print(summary(apply(AB_jp[-ncol(AB_jp)], 1,mean)))#
+    print(summary(apply(AB_en[-ncol(AB_en)], 1,mean)))#
+    print(sd(apply(AB_jp[-ncol(AB_jp)], 1,mean)))#
+    print(sd(apply(AB_en[-ncol(AB_en)], 1,mean)))#
+    print(t.test(apply(AB_jp[-ncol(AB_jp)], 1,mean), apply(AB_en[-ncol(AB_en)], 1,mean)))#
+    print(mean(apply(AB_en[-ncol(AB_jp)], 1,mean)) - mean(apply(AB_jp[-ncol(AB_jp)], 1,mean)))#
+    print(cohen.d(apply(AB_en[-ncol(AB_en)], 1,mean), apply(AB_jp[-ncol(AB_jp)], 1,mean)))#
+    temp <- data.frame(apply(AB_jp[-ncol(AB_jp)], 1,mean))#
+    colnames(temp) <- c("value")#
+    temp$cul <- "JP"#
+    temp$id <- AB_jp$id#
+    temp2 <- data.frame(apply(AB_en[-ncol(AB_en)], 1,mean))#
+    colnames(temp2) <- c("value")#
+    temp2$cul <- "US"#
+    temp2$id <- AB_en$id#
+    AB <- rbind(temp, temp2)#
+    g <- ggplot(AB, aes(x=cul, y=value)) + geom_boxplot()  +#
+    stat_summary(fun=mean, geom="point", shape=20, size=9, color="blue", fill="red")+ #
+    scale_y_continuous(breaks=c(min:max))+#
+    theme(axis.title.x=element_blank(), #
+          axis.title.y=element_blank(),#
+          axis.text=element_text(size=18)#
+         )#
+    print(g)#
+    return(AB)#
+}
+#### by variables #####
+##### moral care for robots ######
+Cor_check(MR_jp[-ncol(MR_jp)])#
+Cor_check(MR_en[-ncol(MR_en)])#
+MR <- Diff_check(MR_jp, MR_en, 1, 7)#
+#
+##### animism ######
+Cor_check(AN_jp[-ncol(AN_jp)])#
+Cor_check(AN_en[-ncol(AN_en)])#
+AN <- Diff_check(AN_jp, AN_en, 1, 5)#
+#
+Cor_check(cbind(AN_jp[-ncol(AN_jp)], AM_jp[-ncol(AM_jp)]))#
+Cor_check(cbind(AN_en[-ncol(AN_en)], AM_en[-ncol(AM_en)]))#
+AN <- Diff_check(AN_jp, AN_en, 1, 5)#
+#
+##### anthropomorphism ######
+Cor_check(AM_jp[-ncol(AM_jp)])#
+Cor_check(AM_en[-ncol(AM_en)])#
+AM <- Diff_check(AM_jp, AM_en, 0, 10)#
+#
+##### anthropocentrism ######
+Cor_check(AC_jp[-ncol(AC_jp)])#
+Cor_check(AC_en[-ncol(AC_en)])#
+AC <- Diff_check(AC_jp, AC_en, 1, 7)#
+#
+##### SBS ######
+Cor_check(SBS_jp[-ncol(SBS_jp)])#
+Cor_check(SBS_en[-ncol(SBS_en)])#
+SBS <- Diff_check(SBS_jp, SBS_en, -4, 4)#
+#
+hist(apply(SBS_jp[-ncol(SBS_jp)], 1,mean), main="Religious beliefs (JP)", xlab="")#
+hist(apply(SBS_en[-ncol(SBS_jp)], 1,mean), main="Religious beliefs (US)", xlab="")#
+#
+##### IRI ######
+Cor_check(IRI_jp[c(1,2,3,4,5,6,7)])#
+Cor_check(IRI_en[c(1,2,3,4,5,6,7)])#
+#
+Cor_check(IRI_jp_ec_nonrev)#
+Cor_check(IRI_en_ec_nonrev)#
+IRI_EC_norev <- Diff_check(IRI_jp[, c(1,3,6,7)], IRI_en[, c(1,3,6,7)], 1, 7)#
+#
+Cor_check(IRI_jp[c(9,10,12,13,14)])#
+Cor_check(IRI_en[c(9,10,12,13,14)])#
+IRI_PT_norev <- Diff_check(IRI_jp[c(9,10,12,13,14)], IRI_en[c(9,10,12,13,14)], 1, 7)#
+#
+##### media effect ######
+Cor_check(EXP_jp[-ncol(EXP_jp)])#
+Cor_check(EXP_en[-ncol(EXP_en)])#
+EXP <- Diff_check(EXP_jp, EXP_en, 1,8)
+#### robot image #####
+robo_rate <- rbind(#
+table(RATE_jp[1]),#
+table(RATE_en[1])#
+    )#
+robo_rate#
+table(RATE_jp[1]) / sum(table(RATE_jp[1]))#
+table(RATE_en[1]) / sum(table(RATE_en[1]))#
+chisq.test(robo_rate)#
+#### religiosity #####
+hist(RHAB_jp$RHAB, breaks=seq(0,10,1), main="Religious attendance (JP)", xlab="")#
+hist(RHAB_en$RHAB, main="Religious attendance (US)", xlab="")#
+table(RHAB_jp$RHAB)#
+table(RHAB_en$RHAB)#
+t.test(RHAB_jp$RHAB, RHAB_en$RHAB)#
+#
+temphab <- data.frame(RHAB_jp$RHAB)#
+colnames(temphab) <- c("value")#
+temphab$cul <- "Japan"#
+temphab$id <- RHAB_jp$id#
+temp2hab <- data.frame(RHAB_en$RHAB)#
+colnames(temp2hab) <- c("value")#
+temp2hab$cul <- "US"#
+temp2hab$id <- RHAB_en$id#
+#
+RHAB <- rbind(temphab, temp2hab)#
+g <- ggplot(RHAB, aes(x=cul, y=value)) + geom_boxplot()  +#
+stat_summary(fun=mean, geom="point", shape=20, size=9, color="blue", fill="red")+#
+    theme(axis.title.x=element_blank(), #
+          axis.title.y=element_blank(),#
+          axis.text=element_text(size=18)#
+         )#
+print(g)#
+#
+sd(RHAB_en$RHAB)#
+sd(RHAB_jp$RHAB)#
+cohen.d(RHAB_en$RHAB, RHAB_jp$RHAB)#
+#### demographics #####
+table(data_jp$Region) / nrow(data_jp)#
+table(data_en$Region) / nrow(data_en)#
+table(data_jp$REL)#
+table(data_en$REL)#
+table(data_jp$FNL1)#
+table(data_jp$FNL2)
+### data resh ####
+colnames(AN) <- c("AN", "cul", "id")#
+colnames(AC) <- c("AC", "cul", "id")#
+colnames(MR) <- c("MR", "cul", "id")#
+colnames(SBS) <- c("SBS", "cul", "id")#
+colnames(AM) <- c("AM", "cul", "id")#
+colnames(IRI) <- c("IRI", "cul", "id")#
+colnames(EXP) <- c("EXP", "cul", "id")#
+colnames(IRI_EC) <- c("IRI_EC", "cul", "id")#
+colnames(IRI_PT) <- c("IRI_PT", "cul", "id")#
+IRI_EC_norev$id <- IRI_EC$id#
+IRI_PT_norev$id <- IRI_PT$id#
+colnames(IRI_EC_norev) <- c("IRI_EC_norev", "cul", "id")#
+colnames(IRI_PT_norev) <- c("IRI_PT_norev", "cul", "id")
+##### anthropomorphism ######
+Cor_check(AM_jp[-ncol(AM_jp)])#
+Cor_check(AM_en[-ncol(AM_en)])#
+AM <- Diff_check(AM_jp, AM_en, 0, 10)
+##### anthropocentrism ######
+Cor_check(AC_jp[-ncol(AC_jp)])#
+Cor_check(AC_en[-ncol(AC_en)])#
+AC <- Diff_check(AC_jp, AC_en, 1, 7)
+### data resh ####
+colnames(AN) <- c("AN", "cul", "id")#
+colnames(AC) <- c("AC", "cul", "id")#
+colnames(MR) <- c("MR", "cul", "id")#
+colnames(SBS) <- c("SBS", "cul", "id")#
+colnames(AM) <- c("AM", "cul", "id")#
+colnames(IRI) <- c("IRI", "cul", "id")#
+colnames(EXP) <- c("EXP", "cul", "id")#
+colnames(IRI_EC) <- c("IRI_EC", "cul", "id")#
+colnames(IRI_PT) <- c("IRI_PT", "cul", "id")#
+IRI_EC_norev$id <- IRI_EC$id#
+IRI_PT_norev$id <- IRI_PT$id#
+colnames(IRI_EC_norev) <- c("IRI_EC_norev", "cul", "id")#
+colnames(IRI_PT_norev) <- c("IRI_PT_norev", "cul", "id")
+##### SBS ######
+Cor_check(SBS_jp[-ncol(SBS_jp)])#
+Cor_check(SBS_en[-ncol(SBS_en)])#
+SBS <- Diff_check(SBS_jp, SBS_en, -4, 4)#
+#
+hist(apply(SBS_jp[-ncol(SBS_jp)], 1,mean), main="Religious beliefs (JP)", xlab="")#
+hist(apply(SBS_en[-ncol(SBS_jp)], 1,mean), main="Religious beliefs (US)", xlab="")#
+#
+##### IRI ######
+Cor_check(IRI_jp[c(1,2,3,4,5,6,7)])#
+Cor_check(IRI_en[c(1,2,3,4,5,6,7)])#
+#
+Cor_check(IRI_jp_ec_nonrev)#
+Cor_check(IRI_en_ec_nonrev)#
+IRI_EC_norev <- Diff_check(IRI_jp[, c(1,3,6,7)], IRI_en[, c(1,3,6,7)], 1, 7)#
+#
+Cor_check(IRI_jp[c(9,10,12,13,14)])#
+Cor_check(IRI_en[c(9,10,12,13,14)])#
+IRI_PT_norev <- Diff_check(IRI_jp[c(9,10,12,13,14)], IRI_en[c(9,10,12,13,14)], 1, 7)#
+#
+##### media effect ######
+Cor_check(EXP_jp[-ncol(EXP_jp)])#
+Cor_check(EXP_en[-ncol(EXP_en)])#
+EXP <- Diff_check(EXP_jp, EXP_en, 1,8)
+colnames(AN) <- c("AN", "cul", "id")#
+colnames(AC) <- c("AC", "cul", "id")#
+colnames(MR) <- c("MR", "cul", "id")#
+colnames(SBS) <- c("SBS", "cul", "id")#
+colnames(AM) <- c("AM", "cul", "id")#
+colnames(IRI) <- c("IRI", "cul", "id")#
+colnames(EXP) <- c("EXP", "cul", "id")#
+colnames(IRI_EC) <- c("IRI_EC", "cul", "id")#
+colnames(IRI_PT) <- c("IRI_PT", "cul", "id")#
+IRI_EC_norev$id <- IRI_EC$id#
+IRI_PT_norev$id <- IRI_PT$id#
+colnames(IRI_EC_norev) <- c("IRI_EC_norev", "cul", "id")#
+colnames(IRI_PT_norev) <- c("IRI_PT_norev", "cul", "id")
+IRI <- Diff_check(IRI_jp, IRI_en, 1, 7)
+### data resh ####
+colnames(AN) <- c("AN", "cul", "id")#
+colnames(AC) <- c("AC", "cul", "id")#
+colnames(MR) <- c("MR", "cul", "id")#
+colnames(SBS) <- c("SBS", "cul", "id")#
+colnames(AM) <- c("AM", "cul", "id")#
+colnames(IRI) <- c("IRI", "cul", "id")#
+colnames(EXP) <- c("EXP", "cul", "id")#
+colnames(IRI_EC) <- c("IRI_EC", "cul", "id")#
+colnames(IRI_PT) <- c("IRI_PT", "cul", "id")#
+IRI_EC_norev$id <- IRI_EC$id#
+IRI_PT_norev$id <- IRI_PT$id#
+colnames(IRI_EC_norev) <- c("IRI_EC_norev", "cul", "id")#
+colnames(IRI_PT_norev) <- c("IRI_PT_norev", "cul", "id")
+IRI <- Diff_check(IRI_jp, IRI_en, 1, 7)
+IRI
+colnames(IRI) <- c("IRI", "cul", "id")
+colnames(SBS) <- c("SBS", "cul", "id")#
+colnames(AM) <- c("AM", "cul", "id")#
+colnames(IRI) <- c("IRI", "cul", "id")#
+colnames(EXP) <- c("EXP", "cul", "id")#
+colnames(IRI_EC) <- c("IRI_EC", "cul", "id")#
+colnames(IRI_PT) <- c("IRI_PT", "cul", "id")#
+IRI_EC_norev$id <- IRI_EC$id#
+IRI_PT_norev$id <- IRI_PT$id#
+colnames(IRI_EC_norev) <- c("IRI_EC_norev", "cul", "id")#
+colnames(IRI_PT_norev) <- c("IRI_PT_norev", "cul", "id")
+IRI_EC <- Diff_check(IRI_jp[c(1,2,3,4,5,6,7,15)], IRI_en[c(1,2,3,4,5,6,7,15)], 1, 7)#
+IRI_PT <- Diff_check(IRI_jp[c(8,9,10,11,12,13,14,15)], IRI_en[c(8,9,10,11,12,13,14,15)], 1, 7)
+colnames(IRI_EC) <- c("IRI_EC", "cul", "id")#
+colnames(IRI_PT) <- c("IRI_PT", "cul", "id")#
+IRI_EC_norev$id <- IRI_EC$id#
+IRI_PT_norev$id <- IRI_PT$id#
+colnames(IRI_EC_norev) <- c("IRI_EC_norev", "cul", "id")#
+colnames(IRI_PT_norev) <- c("IRI_PT_norev", "cul", "id")
+RATE_jp$cul <- "JP"#
+RATE_en$cul <- "US"#
+RATE <- rbind(RATE_jp, RATE_en)#
+RATE$RATE_WITCH[RATE$RATE_WITCH=="A"] = 1#
+RATE$RATE_WITCH[RATE$RATE_WITCH=="B"] = 0#
+DEMO_jp$cul <- "JP"#
+DEMO_en$cul <- "US"#
+DEMO <- rbind(DEMO_jp, DEMO_en)#
+DEMO2_jp$cul <- "JP"#
+DEMO2_en$cul <- "US"#
+colnames(DEMO2_jp) <- c("NAT_1", "NAT_2", "NAT_3", "NAT_4", "LNG_1", "LNG_2", "EDU", "id", "cul")#
+colnames(DEMO2_en) <- c("NAT_1", "NAT_2", "NAT_3", "NAT_4", "LNG_1", "LNG_2", "EDU", "id", "cul")#
+DEMO2_jp$cul <- "JP"#
+DEMO2_en$cul <- "US"#
+DEMO2 <- rbind(DEMO2_jp, DEMO2_en)#
+RHAB_jp$cul <- "JP"#
+RHAB_en$cul <- "US"#
+RHAB <- rbind(RHAB_jp, RHAB_en)
+merge2 <- function(dfs, ...)#
+{#
+　 # res <- merge2(list(Df1, Df2, Df3), by="ID")#
+　 base <- dfs[1]#
+　 lapply(dfs[-1], function(i) base <<- merge(base, i, ...)) # [1]#
+  return(base)#
+}
+full_data <- merge2(list(DEMO, DEMO2, RHAB, AN, AC, RATE, MR, SBS, AM, IRI_EC, IRI_PT, EXP, IRI_EC_norev, IRI_PT_norev), by=c("id", "cul"))
+full_data <- merge2(list(DEMO, DEMO2, RHAB, AN, AC, RATE, MR, SBS, AM, IRI_EC, IRI_PT, EXP, IRI_EC_norev, IRI_PT_norev), by=c("id", "cul"))#
+write.table(full_data, "data2.txt", quote=F, #
+             col.names=T, append=F, sep="\t")
+data_resh<-read.delim("data.txt", sep='\t', header=T, stringsAsFactor=FALSE)#
+quant <- data_resh[c("MR", "RHAB", "AN", "AC", "RATE_WITCH", "SBS", "AM", "IRI_EC", "IRI_PT", "EXP", "cul","Age", "Gender", "EDU")]#
+colnames(quant) <- c("MR", "RHAB", "AN", "AC", "RATE_WITCH", "SBS", "AM", "IRI_EC", "IRI_PT", "EXP", "cul","Age", "Gender", "EDU")#
+edu_tiers <- rownames(table(quant$EDU))#
+data_by_item_JP<-read.delim("JP_DATA.txt", sep='\t', header=T, stringsAsFactor=FALSE)#
+data_by_item_JP$EDU[data_by_item_JP$EDU==edu_tiers[1]] <- 1#
+data_by_item_JP$EDU[data_by_item_JP$EDU==edu_tiers[2]] <- 6#
+data_by_item_JP$EDU[data_by_item_JP$EDU==edu_tiers[3]] <- 2#
+data_by_item_JP$EDU[data_by_item_JP$EDU==edu_tiers[4]] <- 0#
+data_by_item_JP$EDU[data_by_item_JP$EDU==edu_tiers[5]] <- 5#
+data_by_item_JP$EDU[data_by_item_JP$EDU==edu_tiers[6]] <- 3.5#
+data_by_item_JP$EDU[data_by_item_JP$EDU==edu_tiers[7]] <- 0#
+data_by_item_JP$EDU[data_by_item_JP$EDU==edu_tiers[8]] <- 3#
+data_by_item_JP$EDU[data_by_item_JP$EDU==edu_tiers[9]] <- 1#
+data_by_item_JP$EDU[data_by_item_JP$EDU==edu_tiers[10]] <- 4#
+data_by_item_JP$EDU[data_by_item_JP$EDU==edu_tiers[11]] <- 5#
+data_by_item_JP$EDU[data_by_item_JP$EDU==edu_tiers[12]] <- 6#
+data_by_item_JP$EDU[data_by_item_JP$EDU==edu_tiers[13]] <- 2#
+data_by_item_JP$EDU <- as.numeric(data_by_item_JP$EDU)#
+data_by_item_JP$EDU[data_by_item_JP$EDU < 5] <- 0#
+data_by_item_JP$EDU[data_by_item_JP$EDU >= 5] <- 1#
+table(data_by_item_JP$Gender)#
+data_by_item_JP$Gender[data_by_item_JP$Gender=="その他"] <- "2"#
+data_by_item_JP <- subset(data_by_item_JP, data_by_item_JP$Gender != "2")#
+#data_by_item_JP$Gender <- as.factor(data_by_item_JP$Gender)#
+data_by_item_US<-read.delim("US_DATA.txt", sep='\t', header=T, stringsAsFactor=FALSE)#
+data_by_item_US$EDU[data_by_item_US$EDU==edu_tiers[1]] <- 1#
+data_by_item_US$EDU[data_by_item_US$EDU==edu_tiers[2]] <- 6#
+data_by_item_US$EDU[data_by_item_US$EDU==edu_tiers[3]] <- 2#
+data_by_item_US$EDU[data_by_item_US$EDU==edu_tiers[4]] <- 0#
+data_by_item_US$EDU[data_by_item_US$EDU==edu_tiers[5]] <- 5#
+data_by_item_US$EDU[data_by_item_US$EDU==edu_tiers[6]] <- 3.5#
+data_by_item_US$EDU[data_by_item_US$EDU==edu_tiers[7]] <- 0#
+data_by_item_US$EDU[data_by_item_US$EDU==edu_tiers[8]] <- 3#
+data_by_item_US$EDU[data_by_item_US$EDU==edu_tiers[9]] <- 1#
+data_by_item_US$EDU[data_by_item_US$EDU==edu_tiers[10]] <- 4#
+data_by_item_US$EDU[data_by_item_US$EDU==edu_tiers[11]] <- 5#
+data_by_item_US$EDU[data_by_item_US$EDU==edu_tiers[12]] <- 6#
+data_by_item_US$EDU[data_by_item_US$EDU==edu_tiers[13]] <- 2#
+data_by_item_US$EDU <- as.numeric(data_by_item_US$EDU)#
+data_by_item_US$EDU[data_by_item_US$EDU < 5] <- 0#
+data_by_item_US$EDU[data_by_item_US$EDU >= 5] <- 1#
+table(data_by_item_US$Gender)#
+data_by_item_US$Gender[data_by_item_US$Gender=="Other"] <- "2"#
+data_by_item_US <- subset(data_by_item_US, data_by_item_US$Gender != "2")#
+data_by_item_US$cul <- "US"#
+joint_data <- rbind(data_by_item_JP, data_by_item_US)
+library(lavaan)#
+library(ggplot2)#
+data_resh<-read.delim("data.txt", sep='\t', header=T, stringsAsFactor=FALSE)#
+quant <- data_resh[c("MR", "RHAB", "AN", "AC", "RATE_WITCH", "SBS", "AM", "IRI_EC", "IRI_PT", "EXP", "cul","Age", "Gender", "EDU")]#
+colnames(quant) <- c("MR", "RHAB", "AN", "AC", "RATE_WITCH", "SBS", "AM", "IRI_EC", "IRI_PT", "EXP", "cul","Age", "Gender", "EDU")#
+edu_tiers <- rownames(table(quant$EDU))#
+data_by_item_JP<-read.delim("JP_DATA.txt", sep='\t', header=T, stringsAsFactor=FALSE)#
+data_by_item_JP$EDU[data_by_item_JP$EDU==edu_tiers[1]] <- 1#
+data_by_item_JP$EDU[data_by_item_JP$EDU==edu_tiers[2]] <- 6#
+data_by_item_JP$EDU[data_by_item_JP$EDU==edu_tiers[3]] <- 2#
+data_by_item_JP$EDU[data_by_item_JP$EDU==edu_tiers[4]] <- 0#
+data_by_item_JP$EDU[data_by_item_JP$EDU==edu_tiers[5]] <- 5#
+data_by_item_JP$EDU[data_by_item_JP$EDU==edu_tiers[6]] <- 3.5#
+data_by_item_JP$EDU[data_by_item_JP$EDU==edu_tiers[7]] <- 0#
+data_by_item_JP$EDU[data_by_item_JP$EDU==edu_tiers[8]] <- 3#
+data_by_item_JP$EDU[data_by_item_JP$EDU==edu_tiers[9]] <- 1#
+data_by_item_JP$EDU[data_by_item_JP$EDU==edu_tiers[10]] <- 4#
+data_by_item_JP$EDU[data_by_item_JP$EDU==edu_tiers[11]] <- 5#
+data_by_item_JP$EDU[data_by_item_JP$EDU==edu_tiers[12]] <- 6#
+data_by_item_JP$EDU[data_by_item_JP$EDU==edu_tiers[13]] <- 2#
+data_by_item_JP$EDU <- as.numeric(data_by_item_JP$EDU)#
+data_by_item_JP$EDU[data_by_item_JP$EDU < 5] <- 0#
+data_by_item_JP$EDU[data_by_item_JP$EDU >= 5] <- 1#
+table(data_by_item_JP$Gender)#
+data_by_item_JP$Gender[data_by_item_JP$Gender=="その他"] <- "2"#
+data_by_item_JP <- subset(data_by_item_JP, data_by_item_JP$Gender != "2")#
+#data_by_item_JP$Gender <- as.factor(data_by_item_JP$Gender)#
+data_by_item_US<-read.delim("US_DATA.txt", sep='\t', header=T, stringsAsFactor=FALSE)#
+data_by_item_US$EDU[data_by_item_US$EDU==edu_tiers[1]] <- 1#
+data_by_item_US$EDU[data_by_item_US$EDU==edu_tiers[2]] <- 6#
+data_by_item_US$EDU[data_by_item_US$EDU==edu_tiers[3]] <- 2#
+data_by_item_US$EDU[data_by_item_US$EDU==edu_tiers[4]] <- 0#
+data_by_item_US$EDU[data_by_item_US$EDU==edu_tiers[5]] <- 5#
+data_by_item_US$EDU[data_by_item_US$EDU==edu_tiers[6]] <- 3.5#
+data_by_item_US$EDU[data_by_item_US$EDU==edu_tiers[7]] <- 0#
+data_by_item_US$EDU[data_by_item_US$EDU==edu_tiers[8]] <- 3#
+data_by_item_US$EDU[data_by_item_US$EDU==edu_tiers[9]] <- 1#
+data_by_item_US$EDU[data_by_item_US$EDU==edu_tiers[10]] <- 4#
+data_by_item_US$EDU[data_by_item_US$EDU==edu_tiers[11]] <- 5#
+data_by_item_US$EDU[data_by_item_US$EDU==edu_tiers[12]] <- 6#
+data_by_item_US$EDU[data_by_item_US$EDU==edu_tiers[13]] <- 2#
+data_by_item_US$EDU <- as.numeric(data_by_item_US$EDU)#
+data_by_item_US$EDU[data_by_item_US$EDU < 5] <- 0#
+data_by_item_US$EDU[data_by_item_US$EDU >= 5] <- 1#
+table(data_by_item_US$Gender)#
+data_by_item_US$Gender[data_by_item_US$Gender=="Other"] <- "2"#
+data_by_item_US <- subset(data_by_item_US, data_by_item_US$Gender != "2")#
+data_by_item_US$cul <- "US"#
+joint_data <- rbind(data_by_item_JP, data_by_item_US)
+ssource('sem_model.r')
+source('sem_model.r')
+model
+model_result <- cfa(model, joint_data, group = "cul", std.lv=TRUE)
+fitMeasures(fit_preRegi_FULL_multi)
+fitMeasures(model_result)
+write.table(summary(model_result, standardized=F)[1], "coefs_with_anam.tsv", quote=F, sep = "\t",#
+             col.names=T, append=F)
